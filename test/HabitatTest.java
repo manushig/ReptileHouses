@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import conservancy.*;
 
+/**
+ * A JUnit test class for the Habitat class.
+ */
 public class HabitatTest {
 
   private IHabitat habitat1;
@@ -22,9 +25,9 @@ public class HabitatTest {
   @Before
   public void setUp() {
     String habitatName = "Habitat1";
-    String habitatLocation = "North-Zone";
+    //String habitatLocation = "North-Zone";
     int habitatSize = 30;
-    habitat1 = createHabitat(habitatSize, habitatName, habitatLocation);
+    habitat1 = createHabitat(habitatSize, habitatName);
 
     String amphibianSpeciesName = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
@@ -171,6 +174,25 @@ public class HabitatTest {
   }
 
   @Test
+  public void testSameSpeciesNotCompatibleAddedInHabitat() {
+    Boolean expectedResult = true;
+
+    habitat1.isSpeciesCompatibleWithHabitat(grayTreeFrogSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(grayTreeFrogSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.isSpeciesCompatibleWithHabitat(grayTreeFrogSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(grayTreeFrogSpecies);
+  }
+
+  @Test
   public void testAmphibianSpeciesCompatibleOtherSpeciesInHabitat() {
     Boolean expectedResult = true;
 
@@ -256,7 +278,7 @@ public class HabitatTest {
     assertNotEquals(expectedResult, habitat1.getStatus());
 
   }
-  
+
   @Test
   public void testNaturalFeaturesLookup() {
     Boolean expectedResult = true;
@@ -287,15 +309,104 @@ public class HabitatTest {
     habitat1.isSpeciesCompatibleWithHabitat(rattleSnakeSpecies);
 
     assertNotEquals(expectedResult, habitat1.getStatus());
-      
+
     ArrayList<NaturalFeaturesReport> habitatNaturalFtrList = habitat1.reportNaturalFeatures();
-    
+
     assertNotEquals(true, Objects.isNull(habitatNaturalFtrList));
 
   }
 
-  protected IHabitat createHabitat(int habitatSize, String habitatName, String habitatLocation) {
-    return new Habitat(habitatSize, habitatName, habitatLocation);
+  @Test
+  public void testRetriveDetailsToPrintHabitatSign() {
+    Boolean expectedResult = true;
+    habitat1.isSpeciesCompatibleWithHabitat(greenSeaTurtleSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(greenSeaTurtleSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.isSpeciesCompatibleWithHabitat(desertTortoise);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(desertTortoise);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.isSpeciesCompatibleWithHabitat(fenceLizard);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(fenceLizard);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    String actual = habitat1.retriveDetailsToPrintHabitatSign();
+
+    String expectedresult = "Habitat Name: Habitat1\n" + "\n"
+        + "1. Species Name: Green Sea Turtle\n" + "   Total Species Housed: 1\n"
+        + "   Species Characteristics: Green Sea Turtle has heart-shaped shell\n"
+        + "   Species Size: LARGE\n" + "   Interesting Features: \n" + "\n"
+        + "2. Species Name: Desert Tortoise\n" + "   Total Species Housed: 1\n"
+        + "   Species Characteristics: Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.\n"
+        + "   Species Size: MEDIUM\n" + "   Interesting Features: Endangered     \n" + "\n"
+        + "3. Species Name: Fence Lizard\n" + "   Total Species Housed: 1\n"
+        + "   Species Characteristics: Fence Lizard is a member of the spiny lizard family, also known as a blue belly.\n"
+        + "   Species Size: MEDIUM\n" + "   Interesting Features: ";
+    assertEquals(expectedresult, actual);
+
+  }
+
+  @Test
+  public void testEmptyHabitatsMap() {
+    String expected = "Habitat1\n"
+        + "Natural Features:\n"
+        + "Species:";
+    String actual = habitat1.habitatsMap();
+
+    assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testHabitatsMap() {
+    Boolean expectedResult = true;
+    habitat1.isSpeciesCompatibleWithHabitat(greenSeaTurtleSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(greenSeaTurtleSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.isSpeciesCompatibleWithHabitat(desertTortoise);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(desertTortoise);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.isSpeciesCompatibleWithHabitat(fenceLizard);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(fenceLizard);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    String actual = habitat1.habitatsMap();
+
+    String expectedresult = "Habitat1\n"
+        + "Natural Features: SALT_WATER, FLOWING_WATER, ROCKS\n"
+        + "Species: Green Sea Turtle, Desert Tortoise, Fence Lizard";
+    assertEquals(expectedresult, actual);
+
+  }
+
+  protected IHabitat createHabitat(int habitatSize, String habitatName) {
+    return new Habitat(habitatSize, habitatName);
   }
 
   protected ISpecies createSpecies(String speciesName, String speciesType, SpeciesSize size,

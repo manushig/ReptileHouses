@@ -1,17 +1,20 @@
 package conservancy;
 
-import java.util.stream.Stream;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
-public class ReptileHouses implements IReptileHouses {
+/**
+ * The reptile house has habitats for reptiles and amphibians and The
+ * Cold-Blooded Conservancy wants to track the species
+ */
+public final class ReptileHouses implements IReptileHouses {
   private ArrayList<IHabitat> habitatList;
   private ArrayList<ISpecies> speciesList;
   private Boolean result;
 
+  /**
+   * Constructs a reptile house in terms of its 5 name and size.
+   * 
+   */
   public ReptileHouses() {
     this.habitatList = new ArrayList<IHabitat>();
     this.speciesList = new ArrayList<ISpecies>();
@@ -19,51 +22,93 @@ public class ReptileHouses implements IReptileHouses {
   }
 
   @Override
-  public IReptileHouses addSpeciesToReptileHouse(ISpecies species) {
+  public IReptileHouses createSpecies(String speciesName, String speciesType, SpeciesSize size,
+      String characteristic, int minTemp, int maxTemp, NaturalFeature speciesNaturalFeature,
+      Boolean isPoisonous, Boolean isExtinct, Boolean isCompatible, Boolean isEndangered) {
+
+    ISpecies speciesToAdd = new Species(speciesName, speciesType, size, characteristic, minTemp,
+        maxTemp, speciesNaturalFeature, isPoisonous, isExtinct, isCompatible, isEndangered);
+
+    Boolean addSpecies = true;
+    for (ISpecies species : this.speciesList) {
+      if (species.getSpeciesName().equals(speciesToAdd.getSpeciesName())) {
+        addSpecies = false;
+      }
+    }
+
+    if (addSpecies) {
+      this.speciesList.add(speciesToAdd);
+    }
+
+    this.result = addSpecies;
+
+    return this;
+  }
+
+  @Override
+  public IReptileHouses addSpeciesToReptileHouse(String speciesName) {
     this.result = false;
 
-    if (species.getIsSpeciesExtinct()) {
-      species.setSpeciesHabitatStatus("Extinct Species - Not inhabiting a Habitat");
-      addSpeciesToReptileHouseSpiecesList(species);
+    ISpecies speciesToAdd = null;
+    for (ISpecies speciesToLookUp : this.speciesList) {
+      if (speciesToLookUp.getSpeciesName().equals(speciesName)) {
+        speciesToAdd = speciesToLookUp;
+        break;
+      }
+    }
+    if (!Objects.isNull(speciesToAdd)) {
+      if (speciesToAdd.getIsSpeciesExtinct()) {
+        speciesToAdd.setSpeciesHabitatStatus("Extinct Species - Not inhabiting a Habitat");
 
-      this.result = true;
-    } else {
-      if (habitatList.size() == 0) {
+        this.speciesList.add(speciesToAdd);
 
-        createNewHabitatAndSpecies(species);
         this.result = true;
       } else {
-        Boolean isSpeciesHoused = false;
+        if (habitatList.size() == 0) {
 
-        for (IHabitat habitatInReptileHouse : habitatList) {
-          habitatInReptileHouse.isSpeciesCompatibleWithHabitat(species);
+          createNewHabitatAndSpecies(speciesToAdd);
+          this.result = true;
+        } else {
+          Boolean isSpeciesHoused = false;
 
-          Boolean isSpeciesCompatibleInReptileHouseHabitat = habitatInReptileHouse.getStatus();
+          for (IHabitat habitatInReptileHouse : habitatList) {
+            habitatInReptileHouse.isSpeciesCompatibleWithHabitat(speciesToAdd);
 
-          if (isSpeciesCompatibleInReptileHouseHabitat) {
-            habitatInReptileHouse.addSpeciesToHabitat(species);
+            Boolean isSpeciesCompatibleInReptileHouseHabitat = habitatInReptileHouse.getStatus();
 
-            addSpeciesToReptileHouseSpiecesList(species);
+            if (isSpeciesCompatibleInReptileHouseHabitat) {
+              habitatInReptileHouse.addSpeciesToHabitat(speciesToAdd);
 
-            isSpeciesHoused = true;
+              this.speciesList.add(speciesToAdd);
+
+              isSpeciesHoused = true;
+              this.result = true;
+              break;
+            }
+          }
+          if (!isSpeciesHoused) {
+            createNewHabitatAndSpecies(speciesToAdd);
             this.result = true;
-            break;
           }
         }
-        if (!isSpeciesHoused) {
-          createNewHabitatAndSpecies(species);
-          this.result = true;
-        }
       }
+    } else {
+      this.result = false;
     }
     return this;
   }
 
+  /**
+   * Private helper method to create new habitat and add species to that habitat.
+   * 
+   *
+   * @return the IReptileHouses object
+   */
   private IReptileHouses createNewHabitatAndSpecies(ISpecies species) {
     int noOfHabitats = this.habitatList.size();
     String habitatName = String.format("Habitat%d", (noOfHabitats + 1));
 
-    IHabitat habitat = new Habitat(HabitatSize, habitatName, HabitatLocation);
+    IHabitat habitat = new Habitat(HabitatSize, habitatName);
 
     habitat.isSpeciesCompatibleWithHabitat(species);
 
@@ -71,22 +116,10 @@ public class ReptileHouses implements IReptileHouses {
 
     if (isspeciesCompatibleInHabitat) {
       habitat.addSpeciesToHabitat(species);
-      addNewHabitatToReptileHouse(habitat);
-      addSpeciesToReptileHouseSpiecesList(species);
-    }
-    return this;
-  }
-
-  private IReptileHouses addSpeciesToReptileHouseSpiecesList(ISpecies species) {
-    if (!this.speciesList.contains(species)) {
+      if (!this.habitatList.contains(habitat)) {
+        this.habitatList.add(habitat);
+      }
       this.speciesList.add(species);
-    }
-    return this;
-  }
-
-  private IReptileHouses addNewHabitatToReptileHouse(IHabitat habitat) {
-    if (!this.habitatList.contains(habitat)) {
-      this.habitatList.add(habitat);
     }
     return this;
   }
@@ -97,7 +130,7 @@ public class ReptileHouses implements IReptileHouses {
   }
 
   @Override
-  public Map<String, Collection<NaturalFeaturesDetails>> reportNaturalFeatures() {
+  public String reportNaturalFeatures() {
 
     Map<String, Collection<NaturalFeaturesDetails>> naturalFeatureCollections = new HashMap<String, Collection<NaturalFeaturesDetails>>();
 
@@ -133,34 +166,96 @@ public class ReptileHouses implements IReptileHouses {
     Map<String, Collection<NaturalFeaturesDetails>> sortedNaturalFeatureCollections = new TreeMap<String, Collection<NaturalFeaturesDetails>>(
         naturalFeatureCollections);
 
-    return sortedNaturalFeatureCollections;
+    String displayReport = displayReport(sortedNaturalFeatureCollections).toString();
+    return displayReport;
 
   }
 
-  @Override
-  public ArrayList<String> speciesLookUp(ISpecies speciesToLookUp) {
-    ArrayList<String> lookUpResult = new ArrayList<String>();
+  /**
+   * Private helper method to display the natural features details.
+   * 
+   *
+   * @return the StringBuilder object which holds the data to display natural
+   *         features
+   */
+  private StringBuilder displayReport(
+      Map<String, Collection<NaturalFeaturesDetails>> naturalFeaturesLookUp) {
 
-    if (speciesList.contains(speciesToLookUp)) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n**************Natural Features Report**************\n");
+    if (naturalFeaturesLookUp.isEmpty()) {
+      stringBuilder.append("No Natural Features are available to report.");
+    } else {
+      for (Map.Entry<String, Collection<NaturalFeaturesDetails>> naturalFeatureLookupList : naturalFeaturesLookUp
+          .entrySet()) {
+        stringBuilder.append("\nNatural Feature: " + naturalFeatureLookupList.getKey());
+
+        Collection<NaturalFeaturesDetails> naturalFeatureDetailsList = naturalFeatureLookupList
+            .getValue();
+        for (NaturalFeaturesDetails naturalFeaturesDetails : naturalFeatureDetailsList) {
+          stringBuilder.append(
+              "\nHabitat Name: " + naturalFeaturesDetails.getHabitatName() + ", Available Size: "
+                  + naturalFeaturesDetails.getHabitSizeAvailable() + " square meters\n");
+        }
+      }
+    }
+    return stringBuilder;
+  }
+
+  @Override
+  public String speciesLookUp(String speciesName) {
+    ArrayList<String> lookUpResult = new ArrayList<String>();
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append("\n**************" + speciesName + " Lookup**************\n");
+    ISpecies speciesToLookUp = null;
+    for (ISpecies speciesInList : this.speciesList) {
+      if (speciesInList.getSpeciesName().toLowerCase().equals(speciesName.toLowerCase())) {
+        speciesToLookUp = speciesInList;
+        break;
+      }
+    }
+
+    if (!Objects.isNull(speciesToLookUp)) {
+
       Map<String, Collection<SpeciesHabitatStatus>> speciesDetails = speciesToLookUp
           .speciesLookUp();
-      lookUpResult.add("This species is found - ");
+
       for (Map.Entry<String, Collection<SpeciesHabitatStatus>> en : speciesDetails.entrySet()) {
         Collection<SpeciesHabitatStatus> speciesHabitatList = en.getValue();
         for (SpeciesHabitatStatus speciesLocation : speciesHabitatList) {
           lookUpResult.add(speciesLocation.getSpeciesHabitatLocation());
         }
       }
+      if (lookUpResult.size() > 0) {
+        stringBuilder.append(speciesName + " species is Found in: ");
+
+        int habitaNameListCtr = lookUpResult.size();
+        int ctr = 1;
+        for (String habitat : lookUpResult) {
+          stringBuilder.append(habitat);
+          if (!(ctr == habitaNameListCtr)) {
+            stringBuilder.append(", ");
+            ctr++;
+          }
+        }
+        stringBuilder.append("\n");
+      } else {
+        stringBuilder.append(speciesName + " species is not found in Reptile House\n");
+      }
+
     } else {
-      lookUpResult.add("This species is not there in Reptile House");
+      stringBuilder.append(speciesName + " species is unknown to Reptile House");
     }
 
-    return lookUpResult;
+    return stringBuilder.toString();
+
   }
 
   @Override
-  public String printSpeciesIndex() throws IOException {
-    String result = "";
+  public String printSpeciesIndex() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n**************Print All Species Index**************\n");
     Map<String, Collection<SpeciesHabitatStatus>> speciesDetailsCollection = new HashMap<String, Collection<SpeciesHabitatStatus>>();
 
     for (ISpecies species : speciesList) {
@@ -173,54 +268,77 @@ public class ReptileHouses implements IReptileHouses {
       Map<String, Collection<SpeciesHabitatStatus>> sortedSpeciesDetailsCollection = new TreeMap<String, Collection<SpeciesHabitatStatus>>(
           speciesDetailsCollection);
 
-      result = printSpeciesIndexDetailsToFile(sortedSpeciesDetailsCollection);
+      stringBuilder.append(printSpeciesIndexDetails(sortedSpeciesDetailsCollection));
 
     } else {
-      result = "Species Index is not printed - No species in the Reptile House";
+      stringBuilder.append("No species in the Reptile House");
     }
-    return result;
+    return stringBuilder.toString();
   }
 
-  private String printSpeciesIndexDetailsToFile(Map<String, Collection<SpeciesHabitatStatus>> speciesDetailsCollection)
-      throws IOException {
-    String result = "";
+  /**
+   * Private helper method to print species index details.
+   * 
+   *
+   * @return the StringBuilder object which holds print species index details
+   */
+  private StringBuilder printSpeciesIndexDetails(
+      Map<String, Collection<SpeciesHabitatStatus>> speciesDetailsCollection) {
+    StringBuilder stringBuilder = new StringBuilder();
 
-    BufferedWriter br = new BufferedWriter(
-        new FileWriter(new File(".//res//Print_Species_Index.txtFile")));
     int i = 0;
     for (Map.Entry<String, Collection<SpeciesHabitatStatus>> speciesDetailsList : speciesDetailsCollection
         .entrySet()) {
       i++;
-      br.write(i + ". " + speciesDetailsList.getKey() + " inhabiting in: ");
+      stringBuilder.append(i + ". " + speciesDetailsList.getKey() + " inhabiting in: ");
       Collection<SpeciesHabitatStatus> SpeciesHabitatStatusList = speciesDetailsList.getValue();
       int speciesResidedCounter = SpeciesHabitatStatusList.size();
       int ctr = 1;
       for (SpeciesHabitatStatus speciesHabitatStatus : SpeciesHabitatStatusList) {
-        br.write(speciesHabitatStatus.getSpeciesHabitatLocation());
+        stringBuilder.append(speciesHabitatStatus.getSpeciesHabitatLocation());
         if (speciesResidedCounter != ctr) {
-          br.write(", ");
+          stringBuilder.append(", ");
           ctr++;
         }
       }
-      br.newLine();
+      stringBuilder.append("\n");
     }
-    br.flush();
-    return "Print_Species_Index.txtFile is available for printing";
-  }
 
-  // Fixme
-  private void t(ArrayList<NaturalFeaturesReport> naturalFeaturesList) {
-    Collections.sort(naturalFeaturesList, new Comparator<NaturalFeaturesReport>() {
-      public int compare(NaturalFeaturesReport v1, NaturalFeaturesReport v2) {
-        return v1.getNaturalFeature().compareTo(v2.getNaturalFeature());
-      }
-    });
-    this.result = false;
+    return stringBuilder;
   }
 
   @Override
-  public String toString() {
-    return String.format(" has been added to Reptile House");
+  public String printHabitatIndex(String habitatName) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n**************Print Habitat Map**************\n");
+    IHabitat habitatToLookUp = null;
+    for (IHabitat habitatsInList : this.habitatList) {
+      if (habitatsInList.getHabitatName().equals(habitatName)) {
+        habitatToLookUp = habitatsInList;
+        break;
+      }
+    }
+
+    if (!Objects.isNull(habitatToLookUp)) {
+      stringBuilder.append(habitatToLookUp.retriveDetailsToPrintHabitatSign());
+    } else {
+      stringBuilder.append(habitatName + " is not found");
+    }
+
+    return stringBuilder.toString();
+  }
+
+  @Override
+  public String allHabitatsMap() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n**************Print All Habitats Details**************\n");
+    int habitatCtr = 1;
+    for (IHabitat habitat : habitatList) {
+      stringBuilder.append("\n\n" + habitatCtr + ". ");
+      stringBuilder.append(habitat.habitatsMap());
+      habitatCtr++;
+    }
+    return stringBuilder.toString();
   }
 
 }

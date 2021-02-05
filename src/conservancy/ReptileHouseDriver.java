@@ -1,10 +1,5 @@
 package conservancy;
 
-import java.util.Collection;
-import java.util.Map;
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class ReptileHouseDriver {
 
   /**
@@ -12,117 +7,97 @@ public class ReptileHouseDriver {
    * 
    * @param args Not used.
    */
-  private static ISpecies grayTreeFrog;
-  private static ISpecies greenSeaTurtle;
-  private static ISpecies rattleSnake;
-  private static ISpecies hellbenderSalamander;
-  private static ISpecies americanAlligator;
-  private static ISpecies desertTortoise;
-  private static ISpecies fenceLizard;
-  private static ISpecies capeVerdeGiantSkink;
   private static IReptileHouses reptileHouse;
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
     SpeciesData();
-    reptileHouse = new ReptileHouses();
-
+    String displayResult;
     // Add Gray Tree Frog to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(grayTreeFrog);
+    reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
+    System.out.println("Species has been added to Reptile House");
+
+    // Add Gray Tree Frog to the Reptile House again - Is Not CompatibleType Species
+    reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
     System.out.println("Species has been added to Reptile House");
 
     // Add Green Sea Turtle to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(greenSeaTurtle);
+    reptileHouse.addSpeciesToReptileHouse("Green Sea Turtle");
     System.out.println("Species has been added to Reptile House");
 
     // Add Rattlesnake to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(rattleSnake);
+    reptileHouse.addSpeciesToReptileHouse("Rattlesnake");
     System.out.println("Species has been added to Reptile House");
 
     // Add hellbender Salamander to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(hellbenderSalamander);
+    reptileHouse.addSpeciesToReptileHouse("Hellbender Salamander");
     System.out.println("Species has been added to Reptile House");
 
     // Add American Alligator to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(americanAlligator);
+    reptileHouse.addSpeciesToReptileHouse("American Alligator");
     System.out.println("Species has been added to Reptile House");
 
     // Add Desert Tortoise to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(desertTortoise);
+    reptileHouse.addSpeciesToReptileHouse("Desert Tortoise");
     System.out.println("Species has been added to Reptile House");
 
     // Add Extinct species Cape Verde Giant Skink to the Reptile House
-    reptileHouse.addSpeciesToReptileHouse(capeVerdeGiantSkink);
+    reptileHouse.addSpeciesToReptileHouse("Cape Verde Giant Skink");
     System.out.println("Species has been added to Reptile House");
 
     // Report the natural features that are currently being used in alphabetical
     // order.
-    displayReport();
+    displayResult = reptileHouse.reportNaturalFeatures();
+    System.out.println(displayResult);
 
     // Look up which habitat(s) that house a particular species - Extinct species
     // Cape Verde Giant Skink
-    displaySpeciesLookUpResult(capeVerdeGiantSkink);
+    
+    displayResult = reptileHouse.speciesLookUp("Cape Verde Giant Skink");
+    System.out.println(displayResult);
 
-    // Look up which habitat(s) that house a particular species - Gray Tree Frog
-    displaySpeciesLookUpResult(grayTreeFrog);
 
     // Adding another species Gray Tree Frog in Reptile House
-    reptileHouse.addSpeciesToReptileHouse(grayTreeFrog);
-    System.out.println("\n");
+    reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
+
     System.out.println("Species has been added to Reptile House\n");
 
     // Look up again which habitat(s) that house a particular species - Gray Tree
     // Frog
-    displaySpeciesLookUpResult(grayTreeFrog);
+    displayResult = reptileHouse.speciesLookUp("Gray TreeFrog");
+    System.out.println(displayResult);
 
     // Look up which habitat(s) that house a particular species - Fence Lizard -
     // This species has not been added to Reptile House.
-    displaySpeciesLookUpResult(fenceLizard);
+    displayResult = reptileHouse.speciesLookUp("Fence Lizard");
+    System.out.println(displayResult);
     
+
+    // Look up which habitat(s) that house a particular species - T-Rex -
+    // This species has not not been created.
+    displayResult = reptileHouse.speciesLookUp("T-Rex");
+    System.out.println(displayResult);
+
     System.out.println();
-    //Print an index that lists all species in the Reptile House in alphabetical order and their location(s).
-    String result = reptileHouse.printSpeciesIndex();
-    System.out.println(result);
-  }
-
-  private static void displaySpeciesLookUpResult(ISpecies species) {
-    System.out.println("\n**************Species LookUp**************");
-    ArrayList<String> speciesHabitatList = reptileHouse.speciesLookUp(species);
-
-    speciesHabitatList.forEach(habitat -> {
-      System.out.println(habitat);
-    });
-
-  }
-
-  private static void displayReport() {
-    Map<String, Collection<NaturalFeaturesDetails>> naturalFeaturesLookUp = reptileHouse
-        .reportNaturalFeatures();
-    System.out.println("\n**************Natural Features Report**************");
-    if (naturalFeaturesLookUp.isEmpty()) {
-      System.out.println("No Natural Features are available to report.");
-    } else {
-      for (Map.Entry<String, Collection<NaturalFeaturesDetails>> naturalFeatureLookupList : naturalFeaturesLookUp
-          .entrySet()) {
-
-        System.out.print("\nNatural Feature: " + naturalFeatureLookupList.getKey());
-        Collection<NaturalFeaturesDetails> naturalFeatureDetailsList = naturalFeatureLookupList.getValue();
-        for (NaturalFeaturesDetails naturalFeaturesDetails : naturalFeatureDetailsList) {
-          System.out.print("\nHabitat Name: " + naturalFeaturesDetails.getHabitatName() + ", Available Size: "
-              + naturalFeaturesDetails.getHabitSizeAvailable() + " square meters\n");
-        }
-      }
-    }
-  }
-
-  private static ISpecies createSpecies(String speciesName, String speciesType, SpeciesSize size,
-      String characteristic, int minTemp, int maxTemp, NaturalFeature speciesNaturalFeature,
-      Boolean isPoisonous, Boolean isExtinct, Boolean isCompatible, Boolean isEndangered) {
-
-    return new Species(speciesName, speciesType, size, characteristic, minTemp, maxTemp,
-        speciesNaturalFeature, isPoisonous, isExtinct, isCompatible, isEndangered);
+    
+    // Print a sign for any given habitat that lists the species that it houses
+    // along with a description of the species and an indicator of how many of that
+    // species is housed in that habitat.
+    displayResult = reptileHouse.printHabitatIndex("Habitat1");
+    System.out.println(displayResult);
+    System.out.println("\n");
+    
+    displayResult = reptileHouse.allHabitatsMap();
+    System.out.println(displayResult);
+    System.out.println("\n");
+    
+    // Print an index that lists all species in the Reptile House in alphabetical
+    // order and their location(s).
+    displayResult = reptileHouse.printSpeciesIndex();
+    System.out.println(displayResult);
   }
 
   private static void SpeciesData() {
+    reptileHouse = new ReptileHouses();
     String amphibianSpeciesName = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
     SpeciesSize amphibianSize = SpeciesSize.SMALL;
@@ -135,7 +110,7 @@ public class ReptileHouseDriver {
     Boolean amphibianIsEndangered = false;
     Boolean amphibianIsCompatible = false;
 
-    grayTreeFrog = createSpecies(amphibianSpeciesName, amphibianSpeciesType, amphibianSize,
+    reptileHouse.createSpecies(amphibianSpeciesName, amphibianSpeciesType, amphibianSize,
         amphibianCharacteristic, amphibianMinTemp, amphibianMaxTemp, amphibianSpeciesNaturalFeature,
         amphibianIsPoisonous, amphibianIsExtinct, amphibianIsCompatible, amphibianIsEndangered);
 
@@ -151,8 +126,8 @@ public class ReptileHouseDriver {
     Boolean amphibianIsEndangered2 = true;
     Boolean amphibianIsCompatible2 = true;
 
-    hellbenderSalamander = createSpecies(amphibianSpeciesName2, amphibianSpeciesType2,
-        amphibianSize2, amphibianCharacteristic2, amphibianMinTemp2, amphibianMaxTemp2,
+    reptileHouse.createSpecies(amphibianSpeciesName2, amphibianSpeciesType2, amphibianSize2,
+        amphibianCharacteristic2, amphibianMinTemp2, amphibianMaxTemp2,
         amphibianSpeciesNaturalFeature2, amphibianIsPoisonous2, amphibianIsExtinct2,
         amphibianIsCompatible2, amphibianIsEndangered2);
 
@@ -168,7 +143,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsCompatible = true;
     Boolean reptileIsEndangered = false;
 
-    greenSeaTurtle = createSpecies(reptileSpeciesName, reptileSpeciesType, reptileSize,
+    reptileHouse.createSpecies(reptileSpeciesName, reptileSpeciesType, reptileSize,
         reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,
         reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
 
@@ -184,7 +159,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsCompatible2 = true;
     Boolean reptileIsEndangered2 = false;
 
-    rattleSnake = createSpecies(reptileSpeciesName2, reptileSpeciesType2, reptileSize2,
+    reptileHouse.createSpecies(reptileSpeciesName2, reptileSpeciesType2, reptileSize2,
         reptileCharacteristic2, reptileMinTemp2, reptileMaxTemp2, reptileSpeciesNaturalFeature2,
         reptileIsPoisonous2, reptileIsExtinct2, reptileIsCompatible2, reptileIsEndangered2);
 
@@ -200,7 +175,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsCompatible3 = false;
     Boolean reptileIsEndangered3 = false;
 
-    americanAlligator = createSpecies(reptileSpeciesName3, reptileSpeciesType3, reptileSize3,
+    reptileHouse.createSpecies(reptileSpeciesName3, reptileSpeciesType3, reptileSize3,
         reptileCharacteristic3, reptileMinTemp3, reptileMaxTemp3, reptileSpeciesNaturalFeature3,
         reptileIsPoisonous3, reptileIsExtinct3, reptileIsCompatible3, reptileIsEndangered3);
 
@@ -216,7 +191,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsCompatible4 = true;
     Boolean reptileIsEndangered4 = true;
 
-    desertTortoise = createSpecies(reptileSpeciesName4, reptileSpeciesType4, reptileSize4,
+    reptileHouse.createSpecies(reptileSpeciesName4, reptileSpeciesType4, reptileSize4,
         reptileCharacteristic4, reptileMinTemp4, reptileMaxTemp4, reptileSpeciesNaturalFeature4,
         reptileIsPoisonous4, reptileIsExtinct4, reptileIsCompatible4, reptileIsEndangered4);
 
@@ -232,7 +207,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsCompatible5 = true;
     Boolean reptileIsEndangered5 = false;
 
-    fenceLizard = createSpecies(reptileSpeciesName5, reptileSpeciesType5, reptileSize5,
+    reptileHouse.createSpecies(reptileSpeciesName5, reptileSpeciesType5, reptileSize5,
         reptileCharacteristic5, reptileMinTemp5, reptileMaxTemp5, reptileSpeciesNaturalFeature5,
         reptileIsPoisonous5, reptileIsExtinct5, reptileIsCompatible5, reptileIsEndangered5);
 
@@ -248,7 +223,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsCompatible6 = false;
     Boolean reptileIsEndangered6 = false;
 
-    capeVerdeGiantSkink = createSpecies(reptileSpeciesName6, reptileSpeciesType6, reptileSize6,
+    reptileHouse.createSpecies(reptileSpeciesName6, reptileSpeciesType6, reptileSize6,
         reptileCharacteristic6, reptileMinTemp6, reptileMaxTemp6, reptileSpeciesNaturalFeature6,
         reptileIsPoisonous6, reptileIsExtinct6, reptileIsCompatible6, reptileIsEndangered6);
 

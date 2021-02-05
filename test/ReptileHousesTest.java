@@ -1,32 +1,31 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import conservancy.*;
 
+/**
+ * A JUnit test class for the ReptileHouses class.
+ */
 public class ReptileHousesTest {
-
-  private IHabitat habitat1;
-  private ISpecies grayTreeFrogSpecies;
-  private ISpecies greenSeaTurtleSpecies;
-  private ISpecies rattleSnakeSpecies;
-  private ISpecies hellbenderSalamanderSpecies;
-  private ISpecies americanAlligator;
-  private ISpecies desertTortoise;
-  private ISpecies fenceLizard;
-  private ISpecies capeVerdeGiantSkink;
   private IReptileHouses reptileHouse1;
+  String grayTreeFrog;
+  String hellbenderSalamander;
+  String greenSeaTurtle;
+  String rattlesnake;
+  String americanAlligator;
+  String desertTortoise;
+  String fenceLizard;
+  String capeVerdeGiantSkink;
 
   @Before
   public void setUp() {
     reptileHouse1 = new ReptileHouses();
 
-    String amphibianSpeciesName = "Gray TreeFrog";
+    grayTreeFrog = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
     SpeciesSize amphibianSize = SpeciesSize.SMALL;
     String amphibianCharacteristic = "Gray treefrogs have a white spot beneath each eye and a dark stripe from the rear of the eyes to the front of the legs.";
@@ -38,11 +37,11 @@ public class ReptileHousesTest {
     Boolean amphibianIsEndangered = false;
     Boolean amphibianIsCompatible = false;
 
-    grayTreeFrogSpecies = createSpecies(amphibianSpeciesName, amphibianSpeciesType, amphibianSize,
-        amphibianCharacteristic, amphibianMinTemp, amphibianMaxTemp, amphibianSpeciesNaturalFeature,
-        amphibianIsPoisonous, amphibianIsExtinct, amphibianIsCompatible, amphibianIsEndangered);
+    createSpecies(grayTreeFrog, amphibianSpeciesType, amphibianSize, amphibianCharacteristic,
+        amphibianMinTemp, amphibianMaxTemp, amphibianSpeciesNaturalFeature, amphibianIsPoisonous,
+        amphibianIsExtinct, amphibianIsCompatible, amphibianIsEndangered);
 
-    String amphibianSpeciesName2 = "Hellbender Salamander";
+    hellbenderSalamander = "Hellbender Salamander";
     String amphibianSpeciesType2 = "AMPHIBIAN";
     SpeciesSize amphibianSize2 = SpeciesSize.MEDIUM;
     String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished from most other endemic salamander species simply by their size, hellbenders average up to about 2 ft in length, making them the largest amphibian in North America.";
@@ -54,12 +53,12 @@ public class ReptileHousesTest {
     Boolean amphibianIsEndangered2 = true;
     Boolean amphibianIsCompatible2 = true;
 
-    hellbenderSalamanderSpecies = createSpecies(amphibianSpeciesName2, amphibianSpeciesType2,
-        amphibianSize2, amphibianCharacteristic2, amphibianMinTemp2, amphibianMaxTemp2,
+    createSpecies(hellbenderSalamander, amphibianSpeciesType2, amphibianSize2,
+        amphibianCharacteristic2, amphibianMinTemp2, amphibianMaxTemp2,
         amphibianSpeciesNaturalFeature2, amphibianIsPoisonous2, amphibianIsExtinct2,
         amphibianIsCompatible2, amphibianIsEndangered2);
 
-    String reptileSpeciesName = "Green Sea Turtle";
+    greenSeaTurtle = "Green Sea Turtle";
     String reptileSpeciesType = "REPTILE";
     SpeciesSize reptileSize = SpeciesSize.LARGE;
     String reptileCharacteristic = "Green Sea Turtle has heart-shaped shell";
@@ -71,11 +70,11 @@ public class ReptileHousesTest {
     Boolean reptileIsCompatible = true;
     Boolean reptileIsEndangered = false;
 
-    greenSeaTurtleSpecies = createSpecies(reptileSpeciesName, reptileSpeciesType, reptileSize,
-        reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,
-        reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
+    createSpecies(greenSeaTurtle, reptileSpeciesType, reptileSize, reptileCharacteristic,
+        reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature, reptileIsPoisonous,
+        reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
 
-    String reptileSpeciesName2 = "Rattlesnake";
+    rattlesnake = "Rattlesnake";
     String reptileSpeciesType2 = "REPTILE";
     SpeciesSize reptileSize2 = SpeciesSize.LARGE;
     String reptileCharacteristic2 = "Rattlesnake has heavy-bodied snakes with large, broad heads with two light lines on the face";
@@ -87,11 +86,11 @@ public class ReptileHousesTest {
     Boolean reptileIsCompatible2 = true;
     Boolean reptileIsEndangered2 = false;
 
-    rattleSnakeSpecies = createSpecies(reptileSpeciesName2, reptileSpeciesType2, reptileSize2,
-        reptileCharacteristic2, reptileMinTemp2, reptileMaxTemp2, reptileSpeciesNaturalFeature2,
-        reptileIsPoisonous2, reptileIsExtinct2, reptileIsCompatible2, reptileIsEndangered2);
+    createSpecies(rattlesnake, reptileSpeciesType2, reptileSize2, reptileCharacteristic2,
+        reptileMinTemp2, reptileMaxTemp2, reptileSpeciesNaturalFeature2, reptileIsPoisonous2,
+        reptileIsExtinct2, reptileIsCompatible2, reptileIsEndangered2);
 
-    String reptileSpeciesName3 = "American Alligator";
+    americanAlligator = "American Alligator";
     String reptileSpeciesType3 = "REPTILE";
     SpeciesSize reptileSize3 = SpeciesSize.LARGE;
     String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's shell or a moderately sized mammal bone.";
@@ -103,11 +102,11 @@ public class ReptileHousesTest {
     Boolean reptileIsCompatible3 = false;
     Boolean reptileIsEndangered3 = false;
 
-    americanAlligator = createSpecies(reptileSpeciesName3, reptileSpeciesType3, reptileSize3,
-        reptileCharacteristic3, reptileMinTemp3, reptileMaxTemp3, reptileSpeciesNaturalFeature3,
-        reptileIsPoisonous3, reptileIsExtinct3, reptileIsCompatible3, reptileIsEndangered3);
+    createSpecies(americanAlligator, reptileSpeciesType3, reptileSize3, reptileCharacteristic3,
+        reptileMinTemp3, reptileMaxTemp3, reptileSpeciesNaturalFeature3, reptileIsPoisonous3,
+        reptileIsExtinct3, reptileIsCompatible3, reptileIsEndangered3);
 
-    String reptileSpeciesName4 = "Desert Tortoise";
+    desertTortoise = "Desert Tortoise";
     String reptileSpeciesType4 = "REPTILE";
     SpeciesSize reptileSize4 = SpeciesSize.MEDIUM;
     String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.";
@@ -119,11 +118,11 @@ public class ReptileHousesTest {
     Boolean reptileIsCompatible4 = true;
     Boolean reptileIsEndangered4 = true;
 
-    desertTortoise = createSpecies(reptileSpeciesName4, reptileSpeciesType4, reptileSize4,
-        reptileCharacteristic4, reptileMinTemp4, reptileMaxTemp4, reptileSpeciesNaturalFeature4,
-        reptileIsPoisonous4, reptileIsExtinct4, reptileIsCompatible4, reptileIsEndangered4);
+    createSpecies(desertTortoise, reptileSpeciesType4, reptileSize4, reptileCharacteristic4,
+        reptileMinTemp4, reptileMaxTemp4, reptileSpeciesNaturalFeature4, reptileIsPoisonous4,
+        reptileIsExtinct4, reptileIsCompatible4, reptileIsEndangered4);
 
-    String reptileSpeciesName5 = "Fence Lizard";
+    fenceLizard = "Fence Lizard";
     String reptileSpeciesType5 = "REPTILE";
     SpeciesSize reptileSize5 = SpeciesSize.MEDIUM;
     String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known as a blue belly.";
@@ -135,11 +134,11 @@ public class ReptileHousesTest {
     Boolean reptileIsCompatible5 = true;
     Boolean reptileIsEndangered5 = false;
 
-    fenceLizard = createSpecies(reptileSpeciesName5, reptileSpeciesType5, reptileSize5,
-        reptileCharacteristic5, reptileMinTemp5, reptileMaxTemp5, reptileSpeciesNaturalFeature5,
-        reptileIsPoisonous5, reptileIsExtinct5, reptileIsCompatible5, reptileIsEndangered5);
+    createSpecies(fenceLizard, reptileSpeciesType5, reptileSize5, reptileCharacteristic5,
+        reptileMinTemp5, reptileMaxTemp5, reptileSpeciesNaturalFeature5, reptileIsPoisonous5,
+        reptileIsExtinct5, reptileIsCompatible5, reptileIsEndangered5);
 
-    String reptileSpeciesName6 = "Cape Verde Giant Skink";
+    capeVerdeGiantSkink = "Cape Verde Giant Skink";
     String reptileSpeciesType6 = "REPTILE";
     SpeciesSize reptileSize6 = SpeciesSize.LARGE;
     String reptileCharacteristic6 = "Cape Verde Giant Skink has the cylindrical tail was as long as the head and body.";
@@ -151,16 +150,28 @@ public class ReptileHousesTest {
     Boolean reptileIsCompatible6 = false;
     Boolean reptileIsEndangered6 = false;
 
-    capeVerdeGiantSkink = createSpecies(reptileSpeciesName6, reptileSpeciesType6, reptileSize6,
-        reptileCharacteristic6, reptileMinTemp6, reptileMaxTemp6, reptileSpeciesNaturalFeature6,
-        reptileIsPoisonous6, reptileIsExtinct6, reptileIsCompatible6, reptileIsEndangered6);
+    createSpecies(capeVerdeGiantSkink, reptileSpeciesType6, reptileSize6, reptileCharacteristic6,
+        reptileMinTemp6, reptileMaxTemp6, reptileSpeciesNaturalFeature6, reptileIsPoisonous6,
+        reptileIsExtinct6, reptileIsCompatible6, reptileIsEndangered6);
+
   }
+  
+  @Test
+  public void testaddSpeciesWhichIsNotCreatedInReptileHouses() {
+    Boolean expectedResult = false;
+
+    reptileHouse1.addSpeciesToReptileHouse("T-Rex");
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+  }
+ 
 
   @Test
   public void testaddNewExtinctSpeciesIntheReptileHouses() {
     Boolean expectedResult = true;
 
-    reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
+    reptileHouse1.addSpeciesToReptileHouse("Cape Verde Giant Skink");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -170,11 +181,11 @@ public class ReptileHousesTest {
   public void testaddSameSpeciesNotCompatibleIntheReptileHouses() {
     Boolean expectedResult = true;
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse("Gray TreeFrog");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse("Gray TreeFrog");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -184,15 +195,15 @@ public class ReptileHousesTest {
   public void testaddNewDifferentSpeciesTypeIntheReptileHouses() {
     Boolean expectedResult = true;
 
-    reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
+    reptileHouse1.addSpeciesToReptileHouse("Cape Verde Giant Skink");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse("Gray TreeFrog");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(fenceLizard);
+    reptileHouse1.addSpeciesToReptileHouse("Fence Lizard");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -202,23 +213,23 @@ public class ReptileHousesTest {
   public void testaddDifferentSpeciesTypeIntheReptileHouses() {
     Boolean expectedResult = true;
 
-    reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
+    reptileHouse1.addSpeciesToReptileHouse("Cape Verde Giant Skink");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse("Gray TreeFrog");
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtleSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtle);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(rattleSnakeSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(rattlesnake);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamanderSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamander);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -245,26 +256,26 @@ public class ReptileHousesTest {
   }
 
   @Test
-  public void naturalFeaturesLookUp() {
+  public void testNaturalFeaturesLookUp() {
     Boolean expectedResult = true;
 
     reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrog);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtleSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtle);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(rattleSnakeSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(rattlesnake);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamanderSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamander);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -288,50 +299,59 @@ public class ReptileHousesTest {
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    Map<String, Collection<NaturalFeaturesDetails>> naturalFeatureCollection = reptileHouse1
+    String naturalFeatureCollection = reptileHouse1
         .reportNaturalFeatures();
 
     assertNotEquals(true, naturalFeatureCollection.isEmpty());
   }
 
   @Test
-  public void NaturalFeaturesLookUpWhenThereIsNoSpecies() {
-    Map<String, Collection<NaturalFeaturesDetails>> naturalFeatureCollection = reptileHouse1
+  public void testNaturalFeaturesLookUpWhenThereIsNoSpecies() {
+    
+    IReptileHouses reptileHouse2 = new ReptileHouses();
+    
+    String expectedOutput = "\n"
+        + "**************Natural Features Report**************\n"
+        + "No Natural Features are available to report.";
+    String naturalFeatureCollection = reptileHouse2
         .reportNaturalFeatures();
 
-    assertEquals(true, naturalFeatureCollection.isEmpty());
+    assertEquals(expectedOutput, naturalFeatureCollection);
   }
 
   @Test
-  public void speciesLookUp() {
+  public void testSpeciesLookUp() {
     Boolean expectedResult = true;
 
     String expectedValue = "";
 
-    ArrayList<String> capeVerdeGiantSkinkSpeciesLookUp = reptileHouse1
+    String capeVerdeGiantSkinkSpeciesLookUp = reptileHouse1
         .speciesLookUp(capeVerdeGiantSkink);
 
-    expectedValue = "This species is not there in Reptile House";
+    expectedValue = "\n"
+        + "**************Cape Verde Giant Skink Lookup**************\n"
+        + "Cape Verde Giant Skink species is not found in Reptile House\n"
+        + "";
 
-    assertEquals(expectedValue, capeVerdeGiantSkinkSpeciesLookUp.get(0));
+    assertEquals(expectedValue, capeVerdeGiantSkinkSpeciesLookUp);
 
     reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrog);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtleSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtle);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(rattleSnakeSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(rattlesnake);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamanderSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamander);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -355,48 +375,56 @@ public class ReptileHousesTest {
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    ArrayList<String> americanAlligatorSpeciesLookUp = reptileHouse1
+    String americanAlligatorSpeciesLookUp = reptileHouse1
         .speciesLookUp(americanAlligator);
 
-    expectedValue = "Habitat4";
+    expectedValue = "\n"
+        + "**************American Alligator Lookup**************\n"
+        + "American Alligator species is Found in: Habitat4\n"
+        + "";
 
-    assertEquals(expectedValue, americanAlligatorSpeciesLookUp.get(0));
+    assertEquals(expectedValue, americanAlligatorSpeciesLookUp);
 
-    ArrayList<String> desertTortoiseSpeciesLookUp = reptileHouse1.speciesLookUp(desertTortoise);
+    expectedValue = "\n"
+        + "**************Desert Tortoise Lookup**************\n"
+        + "Desert Tortoise species is Found in: Habitat2, Habitat6\n"
+        + "";
+    String desertTortoiseSpeciesLookUp = reptileHouse1.speciesLookUp(desertTortoise);
 
-    int expectedCount = 2;
+    assertEquals(expectedValue, desertTortoiseSpeciesLookUp);
 
-    assertEquals(expectedCount, desertTortoiseSpeciesLookUp.size());
-
-    ArrayList<String> capeVerdeGiantSkinkSpeciesLookUp1 = reptileHouse1
+    String capeVerdeGiantSkinkSpeciesLookUp1 = reptileHouse1
         .speciesLookUp(capeVerdeGiantSkink);
 
-    expectedValue = "Extinct Species - Not inhabiting a Habitat";
+    expectedValue = "\n"
+        + "**************Cape Verde Giant Skink Lookup**************\n"
+        + "Cape Verde Giant Skink species is Found in: Extinct Species - Not inhabiting a Habitat\n"
+        + "";
 
-    assertEquals(expectedValue, capeVerdeGiantSkinkSpeciesLookUp1.get(0));
+    assertEquals(expectedValue, capeVerdeGiantSkinkSpeciesLookUp1);
   }
 
   @Test
-  public void printSpeciesIndex() throws Exception {
+  public void testPrintSpeciesIndex(){
     Boolean expectedResult = true;
 
     reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrogSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrog);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtleSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtle);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(rattleSnakeSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(rattlesnake);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamanderSpecies);
+    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamander);
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
@@ -420,25 +448,231 @@ public class ReptileHousesTest {
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    String expected = "Print_Species_Index.txtFile is available for printing";
+    String expected = "\n"
+        + "**************Print All Species Index**************\n"
+        + "1. American Alligator inhabiting in: Habitat4\n"
+        + "2. Cape Verde Giant Skink inhabiting in: Extinct Species - Not inhabiting a Habitat\n"
+        + "3. Desert Tortoise inhabiting in: Habitat2, Habitat6\n"
+        + "4. Fence Lizard inhabiting in: Habitat5\n"
+        + "5. Gray TreeFrog inhabiting in: Habitat1\n"
+        + "6. Green Sea Turtle inhabiting in: Habitat2\n"
+        + "7. Hellbender Salamander inhabiting in: Habitat3\n"
+        + "8. Rattlesnake inhabiting in: Habitat2\n"
+        + "";
 
     assertEquals(expected, reptileHouse1.printSpeciesIndex());
   }
 
   @Test
-  public void printSpeciesIndexWhenNoSpeciesInReptileHouse() throws Exception {
+  public void testPrintHabitatIndex(){
+    Boolean expectedResult = true;
 
-    String expected = "Species Index is not printed - No species in the Reptile House";
+    reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrog);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtle);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(rattlesnake);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamander);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(americanAlligator);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(desertTortoise);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(fenceLizard);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(desertTortoise);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(desertTortoise);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    String expected;
+    
+    expected = "\n"
+        + "**************Print Habitat Map**************\n"
+        + "Habitat Name: Habitat1\n"
+        + "\n"
+        + "1. Species Name: Gray TreeFrog\n"
+        + "   Total Species Housed: 1\n"
+        + "   Species Characteristics: Gray treefrogs have a white spot beneath each eye and a dark stripe from the rear of the eyes to the front of the legs.\n"
+        + "   Species Size: SMALL\n"
+        + "   Interesting Features: Poisonous     ";
+
+    assertEquals(expected, reptileHouse1.printHabitatIndex("Habitat1"));
+    
+     expected = "\n"
+         + "**************Print Habitat Map**************\n"
+         + "Habitat Name: Habitat2\n"
+         + "\n"
+         + "1. Species Name: Green Sea Turtle\n"
+         + "   Total Species Housed: 1\n"
+         + "   Species Characteristics: Green Sea Turtle has heart-shaped shell\n"
+         + "   Species Size: LARGE\n"
+         + "   Interesting Features: \n"
+         + "\n"
+         + "2. Species Name: Rattlesnake\n"
+         + "   Total Species Housed: 1\n"
+         + "   Species Characteristics: Rattlesnake has heavy-bodied snakes with large, broad heads with two light lines on the face\n"
+         + "   Species Size: LARGE\n"
+         + "   Interesting Features: Poisonous     \n"
+         + "\n"
+         + "3. Species Name: Desert Tortoise\n"
+         + "   Total Species Housed: 2\n"
+         + "   Species Characteristics: Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.\n"
+         + "   Species Size: MEDIUM\n"
+         + "   Interesting Features: Endangered     ";
+
+    assertEquals(expected, reptileHouse1.printHabitatIndex("Habitat2"));
+    
+     expected = "\n"
+         + "**************Print Habitat Map**************\n"
+         + "Habitat7 is not found";
+
+    assertEquals(expected, reptileHouse1.printHabitatIndex("Habitat7"));
+  }
+  
+  @Test
+  public void testAllHabitatsMap(){
+    Boolean expectedResult = true;
+
+    reptileHouse1.addSpeciesToReptileHouse(capeVerdeGiantSkink);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(grayTreeFrog);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(greenSeaTurtle);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(rattlesnake);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(hellbenderSalamander);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(americanAlligator);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(desertTortoise);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(fenceLizard);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(desertTortoise);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    reptileHouse1.addSpeciesToReptileHouse(desertTortoise);
+
+    assertEquals(expectedResult, reptileHouse1.getStatus());
+
+    String expected;
+    
+    expected = "\n"
+        + "**************Print All Habitats Details**************\n"
+        + "\n"
+        + "\n"
+        + "1. Habitat1\n"
+        + "Natural Features: TREE_BRANCHES\n"
+        + "Species: Gray TreeFrog\n"
+        + "\n"
+        + "2. Habitat2\n"
+        + "Natural Features: SALT_WATER, FALLEN_LOGS, FLOWING_WATER\n"
+        + "Species: Green Sea Turtle, Rattlesnake, Desert Tortoise\n"
+        + "\n"
+        + "3. Habitat3\n"
+        + "Natural Features: FLOWING_WATER\n"
+        + "Species: Hellbender Salamander\n"
+        + "\n"
+        + "4. Habitat4\n"
+        + "Natural Features: POND\n"
+        + "Species: American Alligator\n"
+        + "\n"
+        + "5. Habitat5\n"
+        + "Natural Features: ROCKS\n"
+        + "Species: Fence Lizard\n"
+        + "\n"
+        + "6. Habitat6\n"
+        + "Natural Features: FLOWING_WATER\n"
+        + "Species: Desert Tortoise";
+
+    assertEquals(expected, reptileHouse1.allHabitatsMap());
+  }
+  
+  @Test
+  public void testPrintSpeciesIndexWhenNoSpeciesInReptileHouse(){
+
+    String expected = "\n"
+        + "**************Print All Species Index**************\n"
+        + "No species in the Reptile House";
 
     assertEquals(expected, reptileHouse1.printSpeciesIndex());
   }
 
-  protected ISpecies createSpecies(String speciesName, String speciesType, SpeciesSize size,
+  @Test
+  public void testCreateNewSpecies() {
+    String reptileSpeciesName6 = "Cape Verde";
+    String reptileSpeciesType6 = "REPTILE";
+    SpeciesSize reptileSize6 = SpeciesSize.LARGE;
+    String reptileCharacteristic6 = "Cape Verde Giant Skink has the cylindrical tail was as long as the head and body.";
+    int reptileMinTemp6 = 20;
+    int reptileMaxTemp6 = 37;
+    NaturalFeature reptileSpeciesNaturalFeature6 = NaturalFeature.ROCKS;
+    Boolean reptileIsPoisonous6 = false;
+    Boolean reptileIsExtinct6 = true;
+    Boolean reptileIsCompatible6 = false;
+    Boolean reptileIsEndangered6 = false;
+
+    reptileHouse1.createSpecies(reptileSpeciesName6, reptileSpeciesType6, reptileSize6,
+        reptileCharacteristic6, reptileMinTemp6, reptileMaxTemp6, reptileSpeciesNaturalFeature6,
+        reptileIsPoisonous6, reptileIsExtinct6, reptileIsCompatible6, reptileIsEndangered6);
+
+    assertEquals(true, reptileHouse1.getStatus());
+
+    // Create Same Species Again
+    reptileHouse1.createSpecies(reptileSpeciesName6, reptileSpeciesType6, reptileSize6,
+        reptileCharacteristic6, reptileMinTemp6, reptileMaxTemp6, reptileSpeciesNaturalFeature6,
+        reptileIsPoisonous6, reptileIsExtinct6, reptileIsCompatible6, reptileIsEndangered6);
+
+    assertEquals(false, reptileHouse1.getStatus());
+  }
+
+  protected IReptileHouses createSpecies(String speciesName, String speciesType, SpeciesSize size,
       String characteristic, int minTemp, int maxTemp, NaturalFeature speciesNaturalFeature,
       Boolean isPoisonous, Boolean isExtinct, Boolean isCompatible, Boolean isEndangered) {
 
-    return new Species(speciesName, speciesType, size, characteristic, minTemp, maxTemp,
-        speciesNaturalFeature, isPoisonous, isExtinct, isCompatible, isEndangered);
+    return reptileHouse1.createSpecies(speciesName, speciesType, size, characteristic, minTemp,
+        maxTemp, speciesNaturalFeature, isPoisonous, isExtinct, isCompatible, isEndangered);
   }
 
 }

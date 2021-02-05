@@ -2,10 +2,13 @@ package conservancy;
 
 import java.util.ArrayList;
 
+/**
+ * The habitats of reptile house has some characteristics like that it can only
+ * have maximum of 3 natural features, Temperature Range and Size
+ */
 public final class Habitat implements IHabitat {
 
   private final String habitatName;
-  private final String habitatLocation;
   private int habitatAvailableSize;
   private SpeciesType habitatSpeciesType;
   private TemperatureRange habitatTempRangeInCelsius;
@@ -14,9 +17,16 @@ public final class Habitat implements IHabitat {
   public Boolean result;
   public Boolean speciesCompatibality;
 
-  public Habitat(int habitatSize, String habitatName, String habitatLocation) {
+  /**
+   * Constructs a habitat in terms of its name and size.
+   *
+   * @param habitatName It is the name of the habitat
+   * @param habitatSize It is the size of the habitat
+   * 
+   * 
+   */
+  public Habitat(int habitatSize, String habitatName) {
     this.habitatName = habitatName;
-    this.habitatLocation = habitatLocation;
     this.habitatAvailableSize = habitatSize;
     this.habitatSpeciesType = new SpeciesType("");
     this.habitatTempRangeInCelsius = null;
@@ -27,22 +37,37 @@ public final class Habitat implements IHabitat {
 
   @Override
   public IHabitat isSpeciesCompatibleWithHabitat(ISpecies species) {
-    Boolean isSpeciesCompatible = false;
-    if (this.speciesCompatibality) {
-      species.isSpeciesCompatibleWithHabitat(this.habitatSpeciesType,
-          this.habitatTempRangeInCelsius, this.habitatNaturalFeatureList,
-          this.habitatAvailableSize);
-      isSpeciesCompatible = species.getStatus();
+    Boolean doCompatibilityCheck = true;
 
-      if (isSpeciesCompatible) {
-        this.result = true;
+    if (this.speciesCompatibality) {
+      this.result = checkSpeciesCompatibilty(species, doCompatibilityCheck);
+    } else {
+      if (speciesList.contains(species)) {
+        for (ISpecies spec : speciesList) {
+          if (spec.getSpeciesName().equals(species.getSpeciesName())) {
+            doCompatibilityCheck = false;
+            this.result = checkSpeciesCompatibilty(species, doCompatibilityCheck);
+          }
+        }
       } else {
         this.result = false;
       }
-    } else {
-      this.result = false;
     }
     return this;
+  }
+
+  /**
+   * Private helper method to check with the species of its compatibility with the habitat.
+   * 
+   *
+   * @return the Boolean object which indicate the compatibility status
+   */
+  private Boolean checkSpeciesCompatibilty(ISpecies species, Boolean doCompatibilityCheck) {
+    Boolean isSpeciesCompatible = false;
+    species.isSpeciesCompatibleWithHabitat(this.habitatSpeciesType, this.habitatTempRangeInCelsius,
+        this.habitatNaturalFeatureList, this.habitatAvailableSize, doCompatibilityCheck);
+    isSpeciesCompatible = species.getStatus();
+    return isSpeciesCompatible;
   }
 
   @Override
@@ -92,5 +117,54 @@ public final class Habitat implements IHabitat {
     }
     return naturalFtrList;
 
+  }
+
+  @Override
+  public String getHabitatName() {
+    return this.habitatName;
+  }
+
+  @Override
+  public String retriveDetailsToPrintHabitatSign() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("Habitat Name: " + this.getHabitatName());
+    int speciesCtr = 0;
+
+    for (ISpecies species : speciesList) {
+      speciesCtr++;
+      stringBuilder.append("\n\n" + speciesCtr + ". ");
+      stringBuilder.append(species.retriveDetailsToPrintHabitatSign(this.getHabitatName()));
+
+    }
+    return stringBuilder.toString();
+  }
+
+  @Override
+  public String habitatsMap() {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append(this.habitatName);
+    stringBuilder.append("\nNatural Features:");
+    int ctr = 1;
+    int naturalFeatureListCtr = this.habitatNaturalFeatureList.size();
+    for (NaturalFeature naturalFeature : this.habitatNaturalFeatureList) {
+
+      stringBuilder.append(" " + naturalFeature);
+      if (!(ctr == naturalFeatureListCtr)) {
+        stringBuilder.append(",");
+      }
+      ctr++;
+    }
+    stringBuilder.append("\nSpecies:");
+    ctr = 1;
+    int speciesListCtr = this.habitatNaturalFeatureList.size();
+    for (ISpecies species : speciesList) {
+      stringBuilder.append(" " + species.getSpeciesName());
+      if (!(ctr == speciesListCtr)) {
+        stringBuilder.append(",");
+      }
+      ctr++;
+    }
+    return stringBuilder.toString();
   }
 }

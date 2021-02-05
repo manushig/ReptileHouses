@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import conservancy.*;
 
+/**
+ * A JUnit test class for the Species class.
+ */
 public class SpeciesTest {
   private ISpecies amphibianSpecies;
   private ISpecies reptileSpecies;
@@ -50,6 +53,89 @@ public class SpeciesTest {
   }
 
   @Test
+  public void Constructor() {
+    String reptileSpeciesName = "Green Sea Turtle";
+    String reptileSpeciesType = "REPTILE";
+    SpeciesSize reptileSize = SpeciesSize.LARGE;
+    String reptileCharacteristic = "heart-shaped shell";
+    int reptileMinTemp = 20;
+    int reptileMaxTemp = 29;
+    NaturalFeature reptileSpeciesNaturalFeature = NaturalFeature.SALT_WATER;
+    Boolean reptileIsPoisonous = false;
+    Boolean reptileIsExtinct = false;
+    Boolean reptileIsCompatible = true;
+    Boolean reptileIsEndangered = false;
+
+    ISpecies reptile = new Species(reptileSpeciesName, reptileSpeciesType, reptileSize,
+        reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,
+        reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
+
+    assertEquals(true, reptile.getStatus());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testIfMinTemperatureIsLesserThan0Celsius() {
+    String reptileSpeciesName = "Green Sea Turtle";
+    String reptileSpeciesType = "REPTILE";
+    SpeciesSize reptileSize = SpeciesSize.LARGE;
+    String reptileCharacteristic = "heart-shaped shell";
+    int reptileMinTemp = -2;
+    int reptileMaxTemp = 29;
+    NaturalFeature reptileSpeciesNaturalFeature = NaturalFeature.SALT_WATER;
+    Boolean reptileIsPoisonous = false;
+    Boolean reptileIsExtinct = false;
+    Boolean reptileIsCompatible = true;
+    Boolean reptileIsEndangered = false;
+
+    ISpecies reptile = new Species(reptileSpeciesName, reptileSpeciesType, reptileSize,
+        reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,
+        reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
+
+    assertEquals(true, reptile.getStatus());
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testIfMaxTemperatureIsGreaterThan50() {
+    String reptileSpeciesName = "Green Sea Turtle";
+    String reptileSpeciesType = "REPTILE";
+    SpeciesSize reptileSize = SpeciesSize.LARGE;
+    String reptileCharacteristic = "heart-shaped shell";
+    int reptileMinTemp = 2;
+    int reptileMaxTemp = 59;
+    NaturalFeature reptileSpeciesNaturalFeature = NaturalFeature.SALT_WATER;
+    Boolean reptileIsPoisonous = false;
+    Boolean reptileIsExtinct = false;
+    Boolean reptileIsCompatible = true;
+    Boolean reptileIsEndangered = false;
+
+    ISpecies reptile = new Species(reptileSpeciesName, reptileSpeciesType, reptileSize,
+        reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,
+        reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
+
+    assertEquals(true, reptile.getStatus());
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testIfMaxTemperatureIsLesserThanMinTemp() {
+    String reptileSpeciesName = "Green Sea Turtle";
+    String reptileSpeciesType = "REPTILE";
+    SpeciesSize reptileSize = SpeciesSize.LARGE;
+    String reptileCharacteristic = "heart-shaped shell";
+    int reptileMinTemp = 2;
+    int reptileMaxTemp = 1;
+    NaturalFeature reptileSpeciesNaturalFeature = NaturalFeature.SALT_WATER;
+    Boolean reptileIsPoisonous = false;
+    Boolean reptileIsExtinct = false;
+    Boolean reptileIsCompatible = true;
+    Boolean reptileIsEndangered = false;
+
+    ISpecies reptile = new Species(reptileSpeciesName, reptileSpeciesType, reptileSize,
+        reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,
+        reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
+
+    assertEquals(true, reptile.getStatus());
+  }
+  @Test
   public void testIsAmphibianSpeciesCompatibleWithHabitat() {
     SpeciesType speciesType = new SpeciesType("");
     int habitatMinTemp = 18;
@@ -57,11 +143,12 @@ public class SpeciesTest {
     TemperatureRange habitatTempRange = new TemperatureRange(habitatMinTemp, habitatMaxTemp);
     ArrayList<NaturalFeature> habitatNaturalFeatureList = new ArrayList<NaturalFeature>();
     int habitatSize = 5;
+    Boolean doCompatibilityCheck = true;
 
     Boolean expectedResult = true;
 
     amphibianSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, amphibianSpecies.getStatus());
   }
@@ -76,9 +163,9 @@ public class SpeciesTest {
     int habitatSize = 5;
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     amphibianSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, amphibianSpecies.getStatus());
   }
@@ -93,9 +180,9 @@ public class SpeciesTest {
     int habitatSize = 5;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     amphibianSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, amphibianSpecies.getStatus());
   }
@@ -110,9 +197,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -127,9 +214,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -144,9 +231,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -161,9 +248,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -178,9 +265,9 @@ public class SpeciesTest {
     int habitatSize = 10;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -195,9 +282,9 @@ public class SpeciesTest {
     int habitatSize = 5;
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -210,9 +297,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -227,9 +314,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -244,9 +331,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -261,9 +348,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -279,8 +366,9 @@ public class SpeciesTest {
 
     Boolean expectedResult = false;
 
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -295,9 +383,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -328,9 +416,9 @@ public class SpeciesTest {
         reptileIsPoisonous, reptileIsExtinct, reptileIsCompatible, reptileIsEndangered);
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -345,9 +433,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -367,9 +455,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -388,9 +476,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = false;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -409,9 +497,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -430,9 +518,9 @@ public class SpeciesTest {
     int habitatSize = 15;
 
     Boolean expectedResult = true;
-
+    Boolean doCompatibilityCheck = true;
     reptileSpecies.isSpeciesCompatibleWithHabitat(speciesType, habitatTempRange,
-        habitatNaturalFeatureList, habitatSize);
+        habitatNaturalFeatureList, habitatSize, doCompatibilityCheck);
 
     assertEquals(expectedResult, reptileSpecies.getStatus());
   }
@@ -472,16 +560,6 @@ public class SpeciesTest {
     reptileSpecies.setSpeciesHabitatStatus(speciesLoaction2);
     reptileSpecies.setSpeciesHabitatStatus(speciesLoaction2);
     assertEquals(expectedResult, reptileSpecies.getStatus());
-  }
-
-  @Test
-  public void testToString() {
-    String expectedResult = "Species:\r\n" + " Name: Green Sea Turtle \r\n" + " (Description: \r\n"
-        + " Size: LARGE \r\n" + " Characteristic: heart-shaped shell \r\n" + " Indicator: \r\n"
-        + " Poisonous: false \r\n" + " Extinct: false \r\n" + " Compatible: true \r\n"
-        + " Endangered: false";
-    reptileSpecies.toString();
-    assertEquals(expectedResult, reptileSpecies.toString());
   }
 
   @Test
@@ -536,26 +614,26 @@ public class SpeciesTest {
     assertEquals(expectedResult, speciesIndicator1.equals(speciesIndicator2));
     assertNotEquals(expectedResult, speciesIndicator1.equals(strObj));
   }
-  /*
-   * @Test public void testHashCodeWorks() { //speciestype - hash,equal
-   * //temprange - hash, equal //speciesindiactor - equals, hashcode, getispoinous
-   * //speciesdes - equals, getcharacteristic, hashcode Transmission
-   * autoTransmissionExpected = autoTransmission(3, 6, 8, 14, 17);
-   * assertEquals(autoTransmission.hashCode(),
-   * autoTransmissionExpected.hashCode()); }
-   */
-  
+ 
+
   @Test
   public void getIsSpeciesExtinct() {
     Boolean expectedResult = false;
     assertEquals(expectedResult, reptileSpecies.getIsSpeciesExtinct());
   }
-  
+
   @Test
   public void speciesLookUp() {
     Map<String, Collection<SpeciesHabitatStatus>> speciesLookUp = reptileSpecies.speciesLookUp();
-    assertEquals(true, speciesLookUp.size()==1);
+    assertEquals(true, speciesLookUp.isEmpty());
   }
+  
+ /* @Test
+  public void testGetSpeciesCompatiblity()
+  {
+    Boolean actualResult = reptileSpecies.getSpeciesCompatiblity();
+    assertEquals(true, actualResult);
+  }*/
 
   protected ISpecies createSpecies(String speciesName, String speciesType, SpeciesSize size,
       String characteristic, int minTemp, int maxTemp, NaturalFeature speciesNaturalFeature,
@@ -563,6 +641,16 @@ public class SpeciesTest {
 
     return new Species(speciesName, speciesType, size, characteristic, minTemp, maxTemp,
         speciesNaturalFeature, isPoisonous, isExtinct, isCompatible, isEndangered);
+  }
+
+  @Test
+  public void testRetriveDetailsToPrintHabitatSign()
+  {
+    
+    String expctedOutput = "Species Name: Tree Frog\n   Species Characteristics: disc-shaped\n   Species Size: SMALL\n   Interesting Features: ";
+
+    String result = amphibianSpecies.retriveDetailsToPrintHabitatSign("Habitat1");
+    assertEquals(expctedOutput, result);
   }
 
 }

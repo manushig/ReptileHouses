@@ -1,16 +1,29 @@
 package conservancy;
 
-public final class SpeciesType{
+/**
+ * Species Type, whether its a reptile or amphibian.
+ */
+public final class SpeciesType {
   private final String speciesType;
 
+  /**
+   * Constructs a Species Type in terms whether its a reptile or amphibian.
+   *
+   * @param speciesType It is a species Type
+   *
+   */
   public SpeciesType(String speciesType) {
     this.speciesType = speciesType;
   }
-  
+
+  /**
+   * It retrieves Species type
+   *
+   */
   public String getSpeciesType() {
     return this.speciesType;
   }
-  
+
   @Override
   public boolean equals(Object o) {
     // Fast path for pointer equality:
@@ -27,7 +40,7 @@ public final class SpeciesType{
     SpeciesType that = (SpeciesType) o;
 
     boolean b = this.speciesType == that.speciesType;
-    
+
     return b;
   }
 
@@ -35,6 +48,5 @@ public final class SpeciesType{
   public int hashCode() {
     return hashCode();
   }
-  
 
 }
