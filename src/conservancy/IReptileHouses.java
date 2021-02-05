@@ -1,6 +1,6 @@
 package conservancy;
 
-/**
+/**gdfg
  * IReptileHouses, implement a tracking system for their many Reptile Houses
  * which house reptiles and amphibians in a number of different habitats.
  *
@@ -13,7 +13,7 @@ package conservancy;
  * <li>Print a sign for any given habitat that lists the species that it houses
  * along with a description of the species and an indicator of how many of that
  * species is housed in that habitat.
- * <li>Print a “map” that lists all the habitats by location and the natural
+ * <li>Print a ï¿½mapï¿½ that lists all the habitats by location and the natural
  * features in the habitat and species they house.
  * <li>Print an index that lists all species in the Reptile House in
  * alphabetical order and their location(s).
@@ -79,7 +79,7 @@ public interface IReptileHouses {
   public String printHabitatIndex(String habitatName);
 
   /**
-   * Print a “map” that lists all the habitats by location and the natural
+   * Print a ï¿½mapï¿½ that lists all the habitats by location and the natural
    * features in the habitat and species they house.
    *
    * @return a String Objects which has the required map details
