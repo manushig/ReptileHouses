@@ -21,13 +21,13 @@ package conservancy;
  */
 public interface IReptileHouses {
   /**
-   * HabitatSize as 30 square meters
+   * HabitatSize as 30 square meters.
    *
    */
-  public final int HabitatSize = 30;
+  public final int habitatSize = 30;
 
   /**
-   * It creates the species data for the Reptile House to track the species
+   * It creates the species data for the Reptile House to track the species.
    *
    * @return a IReptileHouses object with result property as true, if its
    *         compatible otherwise false
@@ -37,7 +37,7 @@ public interface IReptileHouses {
       Boolean isPoisonous, Boolean isExtinct, Boolean isCompatible, Boolean isEndangered);
 
   /**
-   * It add the species into the habitat to inhabitate
+   * It add the species into the habitat to inhabitate.
    *
    * @return a IReptileHouses object with result property as true, if its
    *         compatible otherwise false

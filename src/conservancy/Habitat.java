@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * The habitats of reptile house has some characteristics like that it can only
- * have maximum of 3 natural features, Temperature Range and Size
+ * have maximum of 3 natural features, Temperature Range and Size.
  */
 public final class Habitat implements IHabitat {
 
@@ -57,7 +57,8 @@ public final class Habitat implements IHabitat {
   }
 
   /**
-   * Private helper method to check with the species of its compatibility with the habitat.
+   * Private helper method to check with the species of its compatibility with the
+   * habitat.
    * 
    *
    * @return the Boolean object which indicate the compatibility status
@@ -150,7 +151,7 @@ public final class Habitat implements IHabitat {
     for (NaturalFeature naturalFeature : this.habitatNaturalFeatureList) {
 
       stringBuilder.append(" " + naturalFeature);
-      if (!(ctr == naturalFeatureListCtr)) {
+      if (ctr != naturalFeatureListCtr) {
         stringBuilder.append(",");
       }
       ctr++;
@@ -160,7 +161,7 @@ public final class Habitat implements IHabitat {
     int speciesListCtr = this.habitatNaturalFeatureList.size();
     for (ISpecies species : speciesList) {
       stringBuilder.append(" " + species.getSpeciesName());
-      if (!(ctr == speciesListCtr)) {
+      if (ctr != speciesListCtr) {
         stringBuilder.append(",");
       }
       ctr++;

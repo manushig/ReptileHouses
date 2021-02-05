@@ -22,7 +22,7 @@ public class TemperatureRange {
   }
 
   /**
-   * It retrieves minimum Temperature
+   * It retrieves minimum Temperature.
    *
    */
   public int getMinTemp() {
@@ -30,7 +30,7 @@ public class TemperatureRange {
   }
 
   /**
-   * It retrieves maximum Temperature
+   * It retrieves maximum Temperature.
    *
    */
   public int getMaxTemp() {

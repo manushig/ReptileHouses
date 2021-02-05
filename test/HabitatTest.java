@@ -1,4 +1,5 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -6,7 +7,13 @@ import java.util.Objects;
 import org.junit.Before;
 import org.junit.Test;
 
-import conservancy.*;
+import conservancy.IHabitat;
+import conservancy.ISpecies;
+import conservancy.NaturalFeature;
+import conservancy.SpeciesSize;
+import conservancy.NaturalFeaturesReport;
+import conservancy.Habitat;
+import conservancy.Species;
 
 /**
  * A JUnit test class for the Habitat class.
@@ -25,14 +32,15 @@ public class HabitatTest {
   @Before
   public void setUp() {
     String habitatName = "Habitat1";
-    //String habitatLocation = "North-Zone";
+    // String habitatLocation = "North-Zone";
     int habitatSize = 30;
     habitat1 = createHabitat(habitatSize, habitatName);
 
     String amphibianSpeciesName = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
     SpeciesSize amphibianSize = SpeciesSize.SMALL;
-    String amphibianCharacteristic = "Gray treefrogs have a white spot beneath each eye and a dark stripe from the rear of the eyes to the front of the legs.";
+    String amphibianCharacteristic = "Gray treefrogs have a white spot beneath "
+        + "each eye and a dark stripe from the rear of the eyes to the front of the legs.";
     int amphibianMinTemp = 10;
     int amphibianMaxTemp = 32;
     NaturalFeature amphibianSpeciesNaturalFeature = NaturalFeature.TREE_BRANCHES;
@@ -48,7 +56,9 @@ public class HabitatTest {
     String amphibianSpeciesName2 = "Hellbender Salamander";
     String amphibianSpeciesType2 = "AMPHIBIAN";
     SpeciesSize amphibianSize2 = SpeciesSize.MEDIUM;
-    String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished from most other endemic salamander species simply by their size, hellbenders average up to about 2 ft in length, making them the largest amphibian in North America.";
+    String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished from most other "
+        + "endemic salamander species simply by their size, hellbenders average up to about "
+        + "2 ft in length, making them the largest amphibian in North America.";
     int amphibianMinTemp2 = 10;
     int amphibianMaxTemp2 = 26;
     NaturalFeature amphibianSpeciesNaturalFeature2 = NaturalFeature.FLOWING_WATER;
@@ -81,7 +91,8 @@ public class HabitatTest {
     String reptileSpeciesName2 = "Rattlesnake";
     String reptileSpeciesType2 = "REPTILE";
     SpeciesSize reptileSize2 = SpeciesSize.LARGE;
-    String reptileCharacteristic2 = "Rattlesnake has heavy-bodied snakes with large, broad heads with two light lines on the face";
+    String reptileCharacteristic2 = "Rattlesnake has heavy-bodied snakes with large, "
+        + "broad heads with two light lines on the face";
     int reptileMinTemp2 = 19;
     int reptileMaxTemp2 = 32;
     NaturalFeature reptileSpeciesNaturalFeature2 = NaturalFeature.FALLEN_LOGS;
@@ -97,7 +108,8 @@ public class HabitatTest {
     String reptileSpeciesName3 = "American Alligator";
     String reptileSpeciesType3 = "REPTILE";
     SpeciesSize reptileSize3 = SpeciesSize.LARGE;
-    String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's shell or a moderately sized mammal bone.";
+    String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's "
+        + "shell or a moderately sized mammal bone.";
     int reptileMinTemp3 = 28;
     int reptileMaxTemp3 = 33;
     NaturalFeature reptileSpeciesNaturalFeature3 = NaturalFeature.POND;
@@ -113,7 +125,8 @@ public class HabitatTest {
     String reptileSpeciesName4 = "Desert Tortoise";
     String reptileSpeciesType4 = "REPTILE";
     SpeciesSize reptileSize4 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.";
+    String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order to hide "
+        + "from the sun in the deep desert.";
     int reptileMinTemp4 = 8;
     int reptileMaxTemp4 = 26;
     NaturalFeature reptileSpeciesNaturalFeature4 = NaturalFeature.FLOWING_WATER;
@@ -129,7 +142,8 @@ public class HabitatTest {
     String reptileSpeciesName5 = "Fence Lizard";
     String reptileSpeciesType5 = "REPTILE";
     SpeciesSize reptileSize5 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known as a blue belly.";
+    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known "
+        + "as a blue belly.";
     int reptileMinTemp5 = 27;
     int reptileMaxTemp5 = 37;
     NaturalFeature reptileSpeciesNaturalFeature5 = NaturalFeature.ROCKS;
@@ -237,6 +251,14 @@ public class HabitatTest {
     assertEquals(expectedResult, habitat1.getStatus());
 
     habitat1.addSpeciesToHabitat(greenSeaTurtleSpecies);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.isSpeciesCompatibleWithHabitat(americanAlligator);
+
+    assertEquals(expectedResult, habitat1.getStatus());
+
+    habitat1.addSpeciesToHabitat(americanAlligator);
 
     assertEquals(expectedResult, habitat1.getStatus());
 
@@ -350,25 +372,25 @@ public class HabitatTest {
         + "   Species Characteristics: Green Sea Turtle has heart-shaped shell\n"
         + "   Species Size: LARGE\n" + "   Interesting Features: \n" + "\n"
         + "2. Species Name: Desert Tortoise\n" + "   Total Species Housed: 1\n"
-        + "   Species Characteristics: Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.\n"
+        + "   Species Characteristics: Desert "
+        + "tortoises dig underground burrows in order to hide from the sun in the deep desert.\n"
         + "   Species Size: MEDIUM\n" + "   Interesting Features: Endangered     \n" + "\n"
         + "3. Species Name: Fence Lizard\n" + "   Total Species Housed: 1\n"
-        + "   Species Characteristics: Fence Lizard is a member of the spiny lizard family, also known as a blue belly.\n"
-        + "   Species Size: MEDIUM\n" + "   Interesting Features: ";
+        + "   Species Characteristics: Fence Lizard is a member of the spiny"
+        + " lizard family, also known as a blue belly.\n" + "   Species Size: MEDIUM\n"
+        + "   Interesting Features: ";
     assertEquals(expectedresult, actual);
 
   }
 
   @Test
   public void testEmptyHabitatsMap() {
-    String expected = "Habitat1\n"
-        + "Natural Features:\n"
-        + "Species:";
+    String expected = "Habitat1\n" + "Natural Features:\n" + "Species:";
     String actual = habitat1.habitatsMap();
 
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void testHabitatsMap() {
     Boolean expectedResult = true;
@@ -398,8 +420,7 @@ public class HabitatTest {
 
     String actual = habitat1.habitatsMap();
 
-    String expectedresult = "Habitat1\n"
-        + "Natural Features: SALT_WATER, FLOWING_WATER, ROCKS\n"
+    String expectedresult = "Habitat1\n" + "Natural Features: SALT_WATER, FLOWING_WATER, ROCKS\n"
         + "Species: Green Sea Turtle, Desert Tortoise, Fence Lizard";
     assertEquals(expectedresult, actual);
 

@@ -1,10 +1,15 @@
 package conservancy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
 
 /**
  * The reptile house has habitats for reptiles and amphibians and The
- * Cold-Blooded Conservancy wants to track the species
+ * Cold-Blooded Conservancy wants to track the species.
  */
 public final class ReptileHouses implements IReptileHouses {
   private ArrayList<IHabitat> habitatList;
@@ -14,6 +19,7 @@ public final class ReptileHouses implements IReptileHouses {
   /**
    * Constructs a reptile house in terms of its 5 name and size.
    * 
+   * @param args Not used.
    */
   public ReptileHouses() {
     this.habitatList = new ArrayList<IHabitat>();
@@ -108,7 +114,7 @@ public final class ReptileHouses implements IReptileHouses {
     int noOfHabitats = this.habitatList.size();
     String habitatName = String.format("Habitat%d", (noOfHabitats + 1));
 
-    IHabitat habitat = new Habitat(HabitatSize, habitatName);
+    IHabitat habitat = new Habitat(habitatSize, habitatName);
 
     habitat.isSpeciesCompatibleWithHabitat(species);
 
@@ -132,14 +138,16 @@ public final class ReptileHouses implements IReptileHouses {
   @Override
   public String reportNaturalFeatures() {
 
-    Map<String, Collection<NaturalFeaturesDetails>> naturalFeatureCollections = new HashMap<String, Collection<NaturalFeaturesDetails>>();
+    Map<String, Collection<NaturalFeaturesDetails>> naturalFeatureCollections = 
+        new HashMap<String, Collection<NaturalFeaturesDetails>>();
 
     for (IHabitat habitatInReptileHouse : this.habitatList) {
       ArrayList<NaturalFeaturesReport> habitatNaturalFeatures = habitatInReptileHouse
           .reportNaturalFeatures();
 
       for (NaturalFeaturesReport naturalFeaturesReport : habitatNaturalFeatures) {
-        Collection<NaturalFeaturesDetails> naturalFeaturesDetails = new ArrayList<NaturalFeaturesDetails>();
+        Collection<NaturalFeaturesDetails> naturalFeaturesDetails = 
+            new ArrayList<NaturalFeaturesDetails>();
 
         NaturalFeature naturalFtr = naturalFeaturesReport.getNaturalFeature();
 
@@ -163,7 +171,8 @@ public final class ReptileHouses implements IReptileHouses {
 
     }
 
-    Map<String, Collection<NaturalFeaturesDetails>> sortedNaturalFeatureCollections = new TreeMap<String, Collection<NaturalFeaturesDetails>>(
+    Map<String, Collection<NaturalFeaturesDetails>> sortedNaturalFeatureCollections = 
+        new TreeMap<String, Collection<NaturalFeaturesDetails>>(
         naturalFeatureCollections);
 
     String displayReport = displayReport(sortedNaturalFeatureCollections).toString();
@@ -256,7 +265,8 @@ public final class ReptileHouses implements IReptileHouses {
   public String printSpeciesIndex() {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n**************Print All Species Index**************\n");
-    Map<String, Collection<SpeciesHabitatStatus>> speciesDetailsCollection = new HashMap<String, Collection<SpeciesHabitatStatus>>();
+    Map<String, Collection<SpeciesHabitatStatus>> speciesDetailsCollection = 
+        new HashMap<String, Collection<SpeciesHabitatStatus>>();
 
     for (ISpecies species : speciesList) {
       Map<String, Collection<SpeciesHabitatStatus>> speciesDetails = species.speciesLookUp();
@@ -265,7 +275,8 @@ public final class ReptileHouses implements IReptileHouses {
 
     }
     if (!speciesDetailsCollection.isEmpty()) {
-      Map<String, Collection<SpeciesHabitatStatus>> sortedSpeciesDetailsCollection = new TreeMap<String, Collection<SpeciesHabitatStatus>>(
+      Map<String, Collection<SpeciesHabitatStatus>> sortedSpeciesDetailsCollection = 
+          new TreeMap<String, Collection<SpeciesHabitatStatus>>(
           speciesDetailsCollection);
 
       stringBuilder.append(printSpeciesIndexDetails(sortedSpeciesDetailsCollection));

@@ -16,12 +16,13 @@ public class HabitatSpeciesDetails {
    * Range, Species Size, Species Type and preferred Natural Feature.
    *
    * 
-   * @param speciesSize      It is the size of the animal(small, medium, large)
-   * @param speciesType      It is the type of the species whether its reptile or
-   *                         Amphibian
-   * @param TemperatureRange It is temperature range in Celsius
-   * @param NaturalFeature   It is a particular natural feature that species
-   *                         prefer to hang out in
+   * @param speciesSize           It is the size of the animal(small, medium,
+   *                              large)
+   * @param speciesType           It is the type of the species whether its
+   *                              reptile or Amphibian
+   * @param tempRangeInCelsius    It is temperature range in Celsius
+   * @param speciesNaturalFeature It is a particular natural feature that species
+   *                              prefer to hang out in
    * 
    */
   public HabitatSpeciesDetails(int speciesSize, SpeciesType speciesType,
@@ -83,7 +84,7 @@ public class HabitatSpeciesDetails {
   }
 
   /**
-   * It sets a species compatible status
+   * It sets a species compatible status.
    *
    */
   public void setSpeciesCompatibality(Boolean speciesCompatibality) {

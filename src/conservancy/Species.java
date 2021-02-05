@@ -8,9 +8,9 @@ import java.util.Objects;
 
 /**
  * The species of animal has some characteristics like species name, species
- * type, species description, preferred Temperature Range, species Indicator
+ * type, species description, preferred Temperature Range, species Indicator.
  */
-public final class Species implements ISpecies, IClientSpecies {
+public final class Species implements ISpecies {
 
   private final String speciesName;
 
@@ -32,7 +32,7 @@ public final class Species implements ISpecies, IClientSpecies {
 
   /**
    * Constructs a species in terms of its species name, species type, species
-   * description, preferred Temperature Range, species Indicator .
+   * description, preferred Temperature Range, species Indicator.
    *
    * @param speciesName           It is the name of the species
    * @param speciesType           It is the type of the species whether its
@@ -108,7 +108,7 @@ public final class Species implements ISpecies, IClientSpecies {
 
   /**
    * Private helper method to check the compatibility of the species with other
-   * species
+   * species.
    *
    * @return the Boolean object which indicate the compatibility status
    */
@@ -128,7 +128,7 @@ public final class Species implements ISpecies, IClientSpecies {
 
   /**
    * Private helper method to check whether habitat Temperature Range is
-   * compatible with species
+   * compatible with species.
    *
    * @return the Boolean object which indicate the compatibility status
    */
@@ -150,7 +150,7 @@ public final class Species implements ISpecies, IClientSpecies {
 
   /**
    * Private helper method to check whether species' type in Habitat is compatible
-   * with the species
+   * with the species.
    *
    * @return the Boolean object which indicate the compatibility status
    */
@@ -164,7 +164,7 @@ public final class Species implements ISpecies, IClientSpecies {
 
   /**
    * Private helper method to check whether preferred natural feature is available
-   * in Habitat
+   * in Habitat.
    *
    * @return the Boolean object which indicate the compatibility status
    */
@@ -228,7 +228,8 @@ public final class Species implements ISpecies, IClientSpecies {
   @Override
   public Map<String, Collection<SpeciesHabitatStatus>> speciesLookUp() {
 
-    Map<String, Collection<SpeciesHabitatStatus>> speciesHabitatList = new HashMap<String, Collection<SpeciesHabitatStatus>>();
+    Map<String, Collection<SpeciesHabitatStatus>> speciesHabitatList = 
+        new HashMap<String, Collection<SpeciesHabitatStatus>>();
     if (!this.speciesHabitatStatusList.isEmpty()) {
       speciesHabitatList.put(this.speciesName, this.speciesHabitatStatusList);
     }

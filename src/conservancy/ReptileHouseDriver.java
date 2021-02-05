@@ -1,5 +1,8 @@
 package conservancy;
 
+/**
+ * Driver program for Reptile House Tracking System, to show how it works.
+ */
 public class ReptileHouseDriver {
 
   /**
@@ -9,6 +12,11 @@ public class ReptileHouseDriver {
    */
   private static IReptileHouses reptileHouse;
 
+  /**
+   * Prints all the output for the various functionalities of the Reptile House
+   * Tracking System
+   * 
+   */
   public static void main(String[] args) {
     SpeciesData();
     String displayResult;
@@ -51,10 +59,9 @@ public class ReptileHouseDriver {
 
     // Look up which habitat(s) that house a particular species - Extinct species
     // Cape Verde Giant Skink
-    
+
     displayResult = reptileHouse.speciesLookUp("Cape Verde Giant Skink");
     System.out.println(displayResult);
-
 
     // Adding another species Gray Tree Frog in Reptile House
     reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
@@ -70,7 +77,6 @@ public class ReptileHouseDriver {
     // This species has not been added to Reptile House.
     displayResult = reptileHouse.speciesLookUp("Fence Lizard");
     System.out.println(displayResult);
-    
 
     // Look up which habitat(s) that house a particular species - T-Rex -
     // This species has not not been created.
@@ -78,18 +84,18 @@ public class ReptileHouseDriver {
     System.out.println(displayResult);
 
     System.out.println();
-    
+
     // Print a sign for any given habitat that lists the species that it houses
     // along with a description of the species and an indicator of how many of that
     // species is housed in that habitat.
     displayResult = reptileHouse.printHabitatIndex("Habitat1");
     System.out.println(displayResult);
     System.out.println("\n");
-    
+
     displayResult = reptileHouse.allHabitatsMap();
     System.out.println(displayResult);
     System.out.println("\n");
-    
+
     // Print an index that lists all species in the Reptile House in alphabetical
     // order and their location(s).
     displayResult = reptileHouse.printSpeciesIndex();
@@ -101,7 +107,8 @@ public class ReptileHouseDriver {
     String amphibianSpeciesName = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
     SpeciesSize amphibianSize = SpeciesSize.SMALL;
-    String amphibianCharacteristic = "Gray treefrogs have a white spot beneath each eye and a dark stripe from the rear of the eyes to the front of the legs.";
+    String amphibianCharacteristic = "Gray treefrogs have a white spot beneath each eye and "
+        + "a dark stripe from the rear of the eyes to the front of the legs.";
     int amphibianMinTemp = 10;
     int amphibianMaxTemp = 32;
     NaturalFeature amphibianSpeciesNaturalFeature = NaturalFeature.TREE_BRANCHES;
@@ -117,7 +124,9 @@ public class ReptileHouseDriver {
     String amphibianSpeciesName2 = "Hellbender Salamander";
     String amphibianSpeciesType2 = "AMPHIBIAN";
     SpeciesSize amphibianSize2 = SpeciesSize.MEDIUM;
-    String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished from most other endemic salamander species simply by their size, hellbenders average up to about 2 ft in length, making them the largest amphibian in North America.";
+    String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished from most "
+        + "other endemic salamander species simply by their size, hellbenders average up to about "
+        + "2 ft in length, making them the largest amphibian in North America.";
     int amphibianMinTemp2 = 10;
     int amphibianMaxTemp2 = 26;
     NaturalFeature amphibianSpeciesNaturalFeature2 = NaturalFeature.FLOWING_WATER;
@@ -150,7 +159,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName2 = "Rattlesnake";
     String reptileSpeciesType2 = "REPTILE";
     SpeciesSize reptileSize2 = SpeciesSize.LARGE;
-    String reptileCharacteristic2 = "Rattlesnake has heavy-bodied snakes with large, broad heads with two light lines on the face";
+    String reptileCharacteristic2 = "Rattlesnake has heavy-bodied snakes with large, broad heads "
+        + "with two light lines on the face";
     int reptileMinTemp2 = 19;
     int reptileMaxTemp2 = 32;
     NaturalFeature reptileSpeciesNaturalFeature2 = NaturalFeature.FALLEN_LOGS;
@@ -166,7 +176,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName3 = "American Alligator";
     String reptileSpeciesType3 = "REPTILE";
     SpeciesSize reptileSize3 = SpeciesSize.LARGE;
-    String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's shell or a moderately sized mammal bone.";
+    String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's shell "
+        + "or a moderately sized mammal bone.";
     int reptileMinTemp3 = 28;
     int reptileMaxTemp3 = 33;
     NaturalFeature reptileSpeciesNaturalFeature3 = NaturalFeature.POND;
@@ -182,7 +193,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName4 = "Desert Tortoise";
     String reptileSpeciesType4 = "REPTILE";
     SpeciesSize reptileSize4 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.";
+    String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order to hide from "
+        + "the sun in the deep desert.";
     int reptileMinTemp4 = 8;
     int reptileMaxTemp4 = 26;
     NaturalFeature reptileSpeciesNaturalFeature4 = NaturalFeature.FLOWING_WATER;
@@ -198,7 +210,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName5 = "Fence Lizard";
     String reptileSpeciesType5 = "REPTILE";
     SpeciesSize reptileSize5 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known as a blue belly.";
+    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known "
+        + "as a blue belly.";
     int reptileMinTemp5 = 27;
     int reptileMaxTemp5 = 37;
     NaturalFeature reptileSpeciesNaturalFeature5 = NaturalFeature.ROCKS;
@@ -214,7 +227,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName6 = "Cape Verde Giant Skink";
     String reptileSpeciesType6 = "REPTILE";
     SpeciesSize reptileSize6 = SpeciesSize.LARGE;
-    String reptileCharacteristic6 = "Cape Verde Giant Skink has the cylindrical tail was as long as the head and body.";
+    String reptileCharacteristic6 = "Cape Verde Giant Skink has the cylindrical tail was as long "
+        + "as the head and body.";
     int reptileMinTemp6 = 20;
     int reptileMaxTemp6 = 37;
     NaturalFeature reptileSpeciesNaturalFeature6 = NaturalFeature.ROCKS;

@@ -12,8 +12,8 @@ public class NaturalFeaturesDetails {
    * Constructs a Natural Features Details, specifying habitat name and what is
    * the available size of that habitat.
    *
-   * @param speciesHabitatLocation It is habitat name
-   * @param sameSpeciesCount       It is the available size of the habitat
+   * @param habitatName        It is habitat name
+   * @param habitSizeAvailable It is the available size of the habitat
    * 
    */
   public NaturalFeaturesDetails(String habitatName, int habitSizeAvailable) {
@@ -46,7 +46,7 @@ public class NaturalFeaturesDetails {
   }
 
   /**
-   * It sets the available size of the habitat
+   * It sets the available size of the habitat.
    *
    */
   public void setHabitSizeAvailable(int habitSizeAvailable) {

@@ -8,7 +8,16 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import conservancy.*;
+import conservancy.ISpecies;
+import conservancy.Species;
+import conservancy.NaturalFeature;
+import conservancy.SpeciesSize;
+import conservancy.SpeciesHabitatStatus;
+import conservancy.SpeciesType;
+import conservancy.SpeciesDescription;
+import conservancy.TemperatureRange;
+import conservancy.HabitatSpeciesDetails;
+import conservancy.SpeciesIndicators;
 
 /**
  * A JUnit test class for the Species class.
@@ -93,7 +102,7 @@ public class SpeciesTest {
 
     assertEquals(true, reptile.getStatus());
   }
-  
+
   @Test(expected = IllegalArgumentException.class)
   public void testIfMaxTemperatureIsGreaterThan50() {
     String reptileSpeciesName = "Green Sea Turtle";
@@ -114,7 +123,7 @@ public class SpeciesTest {
 
     assertEquals(true, reptile.getStatus());
   }
-  
+
   @Test(expected = IllegalArgumentException.class)
   public void testIfMaxTemperatureIsLesserThanMinTemp() {
     String reptileSpeciesName = "Green Sea Turtle";
@@ -135,6 +144,7 @@ public class SpeciesTest {
 
     assertEquals(true, reptile.getStatus());
   }
+
   @Test
   public void testIsAmphibianSpeciesCompatibleWithHabitat() {
     SpeciesType speciesType = new SpeciesType("");
@@ -402,7 +412,8 @@ public class SpeciesTest {
     String reptileSpeciesName = "Rattlesnake";
     String reptileSpeciesType = "REPTILE";
     SpeciesSize reptileSize = SpeciesSize.LARGE;
-    String reptileCharacteristic = " heavy-bodied snakes with large, broad heads with two light lines on the face";
+    String reptileCharacteristic = " heavy-bodied snakes with large, broad heads with two "
+        + "light lines on the face";
     int reptileMinTemp = 26;
     int reptileMaxTemp = 32;
     NaturalFeature reptileSpeciesNaturalFeature = NaturalFeature.FALLEN_LOGS;
@@ -614,7 +625,6 @@ public class SpeciesTest {
     assertEquals(expectedResult, speciesIndicator1.equals(speciesIndicator2));
     assertNotEquals(expectedResult, speciesIndicator1.equals(strObj));
   }
- 
 
   @Test
   public void getIsSpeciesExtinct() {
@@ -627,13 +637,6 @@ public class SpeciesTest {
     Map<String, Collection<SpeciesHabitatStatus>> speciesLookUp = reptileSpecies.speciesLookUp();
     assertEquals(true, speciesLookUp.isEmpty());
   }
-  
- /* @Test
-  public void testGetSpeciesCompatiblity()
-  {
-    Boolean actualResult = reptileSpecies.getSpeciesCompatiblity();
-    assertEquals(true, actualResult);
-  }*/
 
   protected ISpecies createSpecies(String speciesName, String speciesType, SpeciesSize size,
       String characteristic, int minTemp, int maxTemp, NaturalFeature speciesNaturalFeature,
@@ -644,10 +647,10 @@ public class SpeciesTest {
   }
 
   @Test
-  public void testRetriveDetailsToPrintHabitatSign()
-  {
-    
-    String expctedOutput = "Species Name: Tree Frog\n   Species Characteristics: disc-shaped\n   Species Size: SMALL\n   Interesting Features: ";
+  public void testRetriveDetailsToPrintHabitatSign() {
+
+    String expctedOutput = "Species Name: Tree Frog\n   Species Characteristics: disc-shaped\n   "
+        + "Species Size: SMALL\n   Interesting Features: ";
 
     String result = amphibianSpecies.retriveDetailsToPrintHabitatSign("Habitat1");
     assertEquals(expctedOutput, result);

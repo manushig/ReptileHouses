@@ -17,7 +17,7 @@ public final class SpeciesType {
   }
 
   /**
-   * It retrieves Species type
+   * It retrieves Species type.
    *
    */
   public String getSpeciesType() {
