@@ -15,16 +15,33 @@ public final class ReptileHouses implements IReptileHouses {
   private ArrayList<IHabitat> habitatList;
   private ArrayList<ISpecies> speciesList;
   private Boolean result;
+  private static IReptileHouses instance = null;
 
   /**
    * Constructs a reptile house in terms of its 5 name and size.
    * 
-   * @param args Not used.
+   * 
    */
-  public ReptileHouses() {
+  private ReptileHouses() {
     this.habitatList = new ArrayList<IHabitat>();
     this.speciesList = new ArrayList<ISpecies>();
     this.result = true;
+  }
+
+  /**
+   * It creates the instance of ReptileHouses.
+   * 
+   * 
+   */
+  public static IReptileHouses getInstance() {
+    if (instance == null) {
+      synchronized (ReptileHouses.class) {
+        if (instance == null) {
+          instance = new ReptileHouses();
+        }
+      }
+    }
+    return instance;
   }
 
   @Override
@@ -172,8 +189,7 @@ public final class ReptileHouses implements IReptileHouses {
     }
 
     Map<String, Collection<NaturalFeaturesDetails>> sortedNaturalFeatureCollections = 
-        new TreeMap<String, Collection<NaturalFeaturesDetails>>(
-        naturalFeatureCollections);
+        new TreeMap<String, Collection<NaturalFeaturesDetails>>(naturalFeatureCollections);
 
     String displayReport = displayReport(sortedNaturalFeatureCollections).toString();
     return displayReport;
@@ -195,8 +211,8 @@ public final class ReptileHouses implements IReptileHouses {
     if (naturalFeaturesLookUp.isEmpty()) {
       stringBuilder.append("No Natural Features are available to report.");
     } else {
-      for (Map.Entry<String, Collection<NaturalFeaturesDetails>> naturalFeatureLookupList : naturalFeaturesLookUp
-          .entrySet()) {
+      for (Map.Entry<String, Collection<NaturalFeaturesDetails>> naturalFeatureLookupList 
+          : naturalFeaturesLookUp.entrySet()) {
         stringBuilder.append("\nNatural Feature: " + naturalFeatureLookupList.getKey());
 
         Collection<NaturalFeaturesDetails> naturalFeatureDetailsList = naturalFeatureLookupList
@@ -219,7 +235,7 @@ public final class ReptileHouses implements IReptileHouses {
     stringBuilder.append("\n**************" + speciesName + " Lookup**************\n");
     ISpecies speciesToLookUp = null;
     for (ISpecies speciesInList : this.speciesList) {
-      if (speciesInList.getSpeciesName().toLowerCase().equals(speciesName.toLowerCase())) {
+      if (speciesInList.getSpeciesName().equals(speciesName)) {
         speciesToLookUp = speciesInList;
         break;
       }
@@ -237,13 +253,13 @@ public final class ReptileHouses implements IReptileHouses {
         }
       }
       if (lookUpResult.size() > 0) {
-        stringBuilder.append(speciesName + " species is Found in: ");
+        stringBuilder.append(speciesName + " species is Found: ");
 
         int habitaNameListCtr = lookUpResult.size();
         int ctr = 1;
         for (String habitat : lookUpResult) {
           stringBuilder.append(habitat);
-          if (!(ctr == habitaNameListCtr)) {
+          if (ctr != habitaNameListCtr) {
             stringBuilder.append(", ");
             ctr++;
           }
@@ -276,8 +292,7 @@ public final class ReptileHouses implements IReptileHouses {
     }
     if (!speciesDetailsCollection.isEmpty()) {
       Map<String, Collection<SpeciesHabitatStatus>> sortedSpeciesDetailsCollection = 
-          new TreeMap<String, Collection<SpeciesHabitatStatus>>(
-          speciesDetailsCollection);
+          new TreeMap<String, Collection<SpeciesHabitatStatus>>(speciesDetailsCollection);
 
       stringBuilder.append(printSpeciesIndexDetails(sortedSpeciesDetailsCollection));
 
@@ -298,14 +313,14 @@ public final class ReptileHouses implements IReptileHouses {
     StringBuilder stringBuilder = new StringBuilder();
 
     int i = 0;
-    for (Map.Entry<String, Collection<SpeciesHabitatStatus>> speciesDetailsList : speciesDetailsCollection
-        .entrySet()) {
+    for (Map.Entry<String, Collection<SpeciesHabitatStatus>> speciesDetailsList 
+        : speciesDetailsCollection.entrySet()) {
       i++;
       stringBuilder.append(i + ". " + speciesDetailsList.getKey() + " inhabiting in: ");
-      Collection<SpeciesHabitatStatus> SpeciesHabitatStatusList = speciesDetailsList.getValue();
-      int speciesResidedCounter = SpeciesHabitatStatusList.size();
+      Collection<SpeciesHabitatStatus> speciesHabitatStatusList = speciesDetailsList.getValue();
+      int speciesResidedCounter = speciesHabitatStatusList.size();
       int ctr = 1;
-      for (SpeciesHabitatStatus speciesHabitatStatus : SpeciesHabitatStatusList) {
+      for (SpeciesHabitatStatus speciesHabitatStatus : speciesHabitatStatusList) {
         stringBuilder.append(speciesHabitatStatus.getSpeciesHabitatLocation());
         if (speciesResidedCounter != ctr) {
           stringBuilder.append(", ");
@@ -321,7 +336,7 @@ public final class ReptileHouses implements IReptileHouses {
   @Override
   public String printHabitatIndex(String habitatName) {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("\n**************Print Habitat Map**************\n");
+    stringBuilder.append("\n**************Print " + habitatName + " Sign**************\n");
     IHabitat habitatToLookUp = null;
     for (IHabitat habitatsInList : this.habitatList) {
       if (habitatsInList.getHabitatName().equals(habitatName)) {

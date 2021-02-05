@@ -1,6 +1,8 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.lang.reflect.Field;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +26,14 @@ public class ReptileHousesTest {
   String capeVerdeGiantSkink;
 
   @Before
-  public void setUp() {
-    reptileHouse1 = new ReptileHouses();
+  public void setUp() throws SecurityException, NoSuchFieldException, IllegalArgumentException,
+      IllegalAccessException {
+
+    Field instance = ReptileHouses.class.getDeclaredField("instance");
+    instance.setAccessible(true);
+    instance.set(null, null);
+
+    reptileHouse1 = ReptileHouses.getInstance();
 
     grayTreeFrog = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
@@ -316,7 +324,7 @@ public class ReptileHousesTest {
   @Test
   public void testNaturalFeaturesLookUpWhenThereIsNoSpecies() {
 
-    IReptileHouses reptileHouse2 = new ReptileHouses();
+    IReptileHouses reptileHouse2 = ReptileHouses.getInstance();
 
     String expectedOutput = "\n" + "**************Natural Features Report**************\n"
         + "No Natural Features are available to report.";
@@ -381,12 +389,12 @@ public class ReptileHousesTest {
     String americanAlligatorSpeciesLookUp = reptileHouse1.speciesLookUp(americanAlligator);
 
     expectedValue = "\n" + "**************American Alligator Lookup**************\n"
-        + "American Alligator species is Found in: Habitat4\n" + "";
+        + "American Alligator species is Found: Habitat4\n" + "";
 
     assertEquals(expectedValue, americanAlligatorSpeciesLookUp);
 
     expectedValue = "\n" + "**************Desert Tortoise Lookup**************\n"
-        + "Desert Tortoise species is Found in: Habitat2, Habitat6\n" + "";
+        + "Desert Tortoise species is Found: Habitat2, Habitat6\n" + "";
     String desertTortoiseSpeciesLookUp = reptileHouse1.speciesLookUp(desertTortoise);
 
     assertEquals(expectedValue, desertTortoiseSpeciesLookUp);
@@ -394,7 +402,7 @@ public class ReptileHousesTest {
     String capeVerdeGiantSkinkSpeciesLookUp1 = reptileHouse1.speciesLookUp(capeVerdeGiantSkink);
 
     expectedValue = "\n" + "**************Cape Verde Giant Skink Lookup**************\n"
-        + "Cape Verde Giant Skink species is Found in: Extinct Species - Not inhabiting a Habitat\n"
+        + "Cape Verde Giant Skink species is Found: Extinct Species - Not inhabiting a Habitat\n"
         + "";
 
     assertEquals(expectedValue, capeVerdeGiantSkinkSpeciesLookUp1);
@@ -502,16 +510,16 @@ public class ReptileHousesTest {
 
     String expected;
 
-    expected = "\n" + "**************Print Habitat Map**************\n" + "Habitat Name: Habitat1\n"
-        + "\n" + "1. Species Name: Gray TreeFrog\n" + "   Total Species Housed: 1\n"
+    expected = "\n" + "**************Print Habitat1 Sign**************\n" + "\n" + "\n"
+        + "1. Species Name: Gray TreeFrog\n" + "   Total Species Housed: 1\n"
         + "   Species Characteristics: Gray treefrogs have a white spot beneath each "
         + "eye and a dark stripe from the rear of the eyes to the front of the legs.\n"
         + "   Species Size: SMALL\n" + "   Interesting Features: Poisonous     ";
 
     assertEquals(expected, reptileHouse1.printHabitatIndex("Habitat1"));
 
-    expected = "\n" + "**************Print Habitat Map**************\n" + "Habitat Name: Habitat2\n"
-        + "\n" + "1. Species Name: Green Sea Turtle\n" + "   Total Species Housed: 1\n"
+    expected = "\n" + "**************Print Habitat2 Sign**************\n" + "\n" + "\n"
+        + "1. Species Name: Green Sea Turtle\n" + "   Total Species Housed: 1\n"
         + "   Species Characteristics: Green Sea Turtle has heart-shaped shell\n"
         + "   Species Size: LARGE\n" + "   Interesting Features: \n" + "\n"
         + "2. Species Name: Rattlesnake\n" + "   Total Species Housed: 1\n"
@@ -525,7 +533,7 @@ public class ReptileHousesTest {
 
     assertEquals(expected, reptileHouse1.printHabitatIndex("Habitat2"));
 
-    expected = "\n" + "**************Print Habitat Map**************\n" + "Habitat7 is not found";
+    expected = "\n" + "**************Print Habitat7 Sign**************\n" + "Habitat7 is not found";
 
     assertEquals(expected, reptileHouse1.printHabitatIndex("Habitat7"));
   }

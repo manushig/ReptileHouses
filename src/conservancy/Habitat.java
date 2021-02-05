@@ -128,7 +128,6 @@ public final class Habitat implements IHabitat {
   @Override
   public String retriveDetailsToPrintHabitatSign() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("Habitat Name: " + this.getHabitatName());
     int speciesCtr = 0;
 
     for (ISpecies species : speciesList) {

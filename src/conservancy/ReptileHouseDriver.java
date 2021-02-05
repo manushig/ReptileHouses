@@ -14,43 +14,50 @@ public class ReptileHouseDriver {
 
   /**
    * Prints all the output for the various functionalities of the Reptile House
-   * Tracking System
+   * Tracking System.
    * 
    */
   public static void main(String[] args) {
-    SpeciesData();
+    reptileHouse = ReptileHouses.getInstance();
+
+    speciesData();
     String displayResult;
     // Add Gray Tree Frog to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Gray TreeFrog has been added to Reptile House");
 
     // Add Gray Tree Frog to the Reptile House again - Is Not CompatibleType Species
     reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Gray TreeFrog has been added again to Reptile House to verify multile "
+        + "animal of same non compatible species can be added to habitat");
 
     // Add Green Sea Turtle to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("Green Sea Turtle");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Green Sea Turtle has been added to Reptile House");
 
     // Add Rattlesnake to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("Rattlesnake");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Rattlesnake has been added to Reptile House");
 
     // Add hellbender Salamander to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("Hellbender Salamander");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Hellbender Salamander has been added to Reptile House");
 
     // Add American Alligator to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("American Alligator");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("American Alligator has been added to Reptile House");
 
     // Add Desert Tortoise to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("Desert Tortoise");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Desert Tortoise has been added to Reptile House");
+
+    // Add Desert Tortoise to the Reptile House
+    reptileHouse.addSpeciesToReptileHouse("Desert Tortoise");
+    System.out.println("Desert Tortoise has been added again to Reptile House");
 
     // Add Extinct species Cape Verde Giant Skink to the Reptile House
     reptileHouse.addSpeciesToReptileHouse("Cape Verde Giant Skink");
-    System.out.println("Species has been added to Reptile House");
+    System.out.println("Extinct species Cape Verde Giant Skink has been added to Reptile House");
 
     // Report the natural features that are currently being used in alphabetical
     // order.
@@ -62,11 +69,6 @@ public class ReptileHouseDriver {
 
     displayResult = reptileHouse.speciesLookUp("Cape Verde Giant Skink");
     System.out.println(displayResult);
-
-    // Adding another species Gray Tree Frog in Reptile House
-    reptileHouse.addSpeciesToReptileHouse("Gray TreeFrog");
-
-    System.out.println("Species has been added to Reptile House\n");
 
     // Look up again which habitat(s) that house a particular species - Gray Tree
     // Frog
@@ -88,7 +90,7 @@ public class ReptileHouseDriver {
     // Print a sign for any given habitat that lists the species that it houses
     // along with a description of the species and an indicator of how many of that
     // species is housed in that habitat.
-    displayResult = reptileHouse.printHabitatIndex("Habitat1");
+    displayResult = reptileHouse.printHabitatIndex("Habitat2");
     System.out.println(displayResult);
     System.out.println("\n");
 
@@ -102,8 +104,8 @@ public class ReptileHouseDriver {
     System.out.println(displayResult);
   }
 
-  private static void SpeciesData() {
-    reptileHouse = new ReptileHouses();
+  private static void speciesData() {
+
     String amphibianSpeciesName = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
     SpeciesSize amphibianSize = SpeciesSize.SMALL;
@@ -176,8 +178,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName3 = "American Alligator";
     String reptileSpeciesType3 = "REPTILE";
     SpeciesSize reptileSize3 = SpeciesSize.LARGE;
-    String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's shell "
-        + "or a moderately sized mammal bone.";
+    String reptileCharacteristic3 = "American alligator is capable of biting through a "
+        + "turtle's shell " + "or a moderately sized mammal bone.";
     int reptileMinTemp3 = 28;
     int reptileMaxTemp3 = 33;
     NaturalFeature reptileSpeciesNaturalFeature3 = NaturalFeature.POND;
@@ -193,8 +195,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName4 = "Desert Tortoise";
     String reptileSpeciesType4 = "REPTILE";
     SpeciesSize reptileSize4 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order to hide from "
-        + "the sun in the deep desert.";
+    String reptileCharacteristic4 = "Desert tortoises dig underground burrows in order "
+        + "to hide from " + "the sun in the deep desert.";
     int reptileMinTemp4 = 8;
     int reptileMaxTemp4 = 26;
     NaturalFeature reptileSpeciesNaturalFeature4 = NaturalFeature.FLOWING_WATER;
@@ -210,8 +212,8 @@ public class ReptileHouseDriver {
     String reptileSpeciesName5 = "Fence Lizard";
     String reptileSpeciesType5 = "REPTILE";
     SpeciesSize reptileSize5 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known "
-        + "as a blue belly.";
+    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, "
+        + "also known " + "as a blue belly.";
     int reptileMinTemp5 = 27;
     int reptileMaxTemp5 = 37;
     NaturalFeature reptileSpeciesNaturalFeature5 = NaturalFeature.ROCKS;

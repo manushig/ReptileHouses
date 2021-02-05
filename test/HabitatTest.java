@@ -25,7 +25,6 @@ public class HabitatTest {
   private ISpecies greenSeaTurtleSpecies;
   private ISpecies rattleSnakeSpecies;
   private ISpecies hellbenderSalamanderSpecies;
-  private ISpecies americanAlligator;
   private ISpecies desertTortoise;
   private ISpecies fenceLizard;
 
@@ -56,9 +55,10 @@ public class HabitatTest {
     String amphibianSpeciesName2 = "Hellbender Salamander";
     String amphibianSpeciesType2 = "AMPHIBIAN";
     SpeciesSize amphibianSize2 = SpeciesSize.MEDIUM;
-    String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished from most other "
-        + "endemic salamander species simply by their size, hellbenders average up to about "
-        + "2 ft in length, making them the largest amphibian in North America.";
+    String amphibianCharacteristic2 = "Hellbender Salamander is easily distinguished "
+        + "from most other endemic salamander species simply by their size, hellbenders "
+        + "average up to about 2 ft in length, making them the largest amphibian in "
+        + "North America.";
     int amphibianMinTemp2 = 10;
     int amphibianMaxTemp2 = 26;
     NaturalFeature amphibianSpeciesNaturalFeature2 = NaturalFeature.FLOWING_WATER;
@@ -105,23 +105,6 @@ public class HabitatTest {
         reptileCharacteristic2, reptileMinTemp2, reptileMaxTemp2, reptileSpeciesNaturalFeature2,
         reptileIsPoisonous2, reptileIsExtinct2, reptileIsCompatible2, reptileIsEndangered2);
 
-    String reptileSpeciesName3 = "American Alligator";
-    String reptileSpeciesType3 = "REPTILE";
-    SpeciesSize reptileSize3 = SpeciesSize.LARGE;
-    String reptileCharacteristic3 = "American alligator is capable of biting through a turtle's "
-        + "shell or a moderately sized mammal bone.";
-    int reptileMinTemp3 = 28;
-    int reptileMaxTemp3 = 33;
-    NaturalFeature reptileSpeciesNaturalFeature3 = NaturalFeature.POND;
-    Boolean reptileIsPoisonous3 = false;
-    Boolean reptileIsExtinct3 = false;
-    Boolean reptileIsCompatible3 = false;
-    Boolean reptileIsEndangered3 = false;
-
-    americanAlligator = createSpecies(reptileSpeciesName3, reptileSpeciesType3, reptileSize3,
-        reptileCharacteristic3, reptileMinTemp3, reptileMaxTemp3, reptileSpeciesNaturalFeature3,
-        reptileIsPoisonous3, reptileIsExtinct3, reptileIsCompatible3, reptileIsEndangered3);
-
     String reptileSpeciesName4 = "Desert Tortoise";
     String reptileSpeciesType4 = "REPTILE";
     SpeciesSize reptileSize4 = SpeciesSize.MEDIUM;
@@ -142,8 +125,8 @@ public class HabitatTest {
     String reptileSpeciesName5 = "Fence Lizard";
     String reptileSpeciesType5 = "REPTILE";
     SpeciesSize reptileSize5 = SpeciesSize.MEDIUM;
-    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, also known "
-        + "as a blue belly.";
+    String reptileCharacteristic5 = "Fence Lizard is a member of the spiny lizard family, "
+        + "also known as a blue belly.";
     int reptileMinTemp5 = 27;
     int reptileMaxTemp5 = 37;
     NaturalFeature reptileSpeciesNaturalFeature5 = NaturalFeature.ROCKS;
@@ -254,14 +237,6 @@ public class HabitatTest {
 
     assertEquals(expectedResult, habitat1.getStatus());
 
-    habitat1.isSpeciesCompatibleWithHabitat(americanAlligator);
-
-    assertEquals(expectedResult, habitat1.getStatus());
-
-    habitat1.addSpeciesToHabitat(americanAlligator);
-
-    assertEquals(expectedResult, habitat1.getStatus());
-
     habitat1.isSpeciesCompatibleWithHabitat(greenSeaTurtleSpecies);
 
     assertNotEquals(expectedResult, habitat1.getStatus());
@@ -367,15 +342,15 @@ public class HabitatTest {
 
     String actual = habitat1.retriveDetailsToPrintHabitatSign();
 
-    String expectedresult = "Habitat Name: Habitat1\n" + "\n"
-        + "1. Species Name: Green Sea Turtle\n" + "   Total Species Housed: 1\n"
+    String expectedresult = "\n\n" + "1. Species Name: Green Sea Turtle\n"
+        + "   Total Species Housed: 1\n"
         + "   Species Characteristics: Green Sea Turtle has heart-shaped shell\n"
         + "   Species Size: LARGE\n" + "   Interesting Features: \n" + "\n"
         + "2. Species Name: Desert Tortoise\n" + "   Total Species Housed: 1\n"
         + "   Species Characteristics: Desert "
-        + "tortoises dig underground burrows in order to hide from the sun in the deep desert.\n"
-        + "   Species Size: MEDIUM\n" + "   Interesting Features: Endangered     \n" + "\n"
-        + "3. Species Name: Fence Lizard\n" + "   Total Species Housed: 1\n"
+        + "tortoises dig underground burrows in order to hide from the sun in the deep "
+        + "desert.\n   Species Size: MEDIUM\n" + "   Interesting Features: Endangered     " + "\n"
+        + "\n" + "3. Species Name: Fence Lizard\n" + "   Total Species Housed: 1\n"
         + "   Species Characteristics: Fence Lizard is a member of the spiny"
         + " lizard family, also known as a blue belly.\n" + "   Species Size: MEDIUM\n"
         + "   Interesting Features: ";

@@ -93,4 +93,9 @@ public interface IReptileHouses {
    * @return a String Objects which has sorted list of species and its location
    */
   public String allHabitatsMap();
+  
+  public static IReptileHouses getInstance() {
+    return ReptileHouses.getInstance();
+  }
+
 }
