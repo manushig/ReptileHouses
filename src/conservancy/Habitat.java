@@ -3,7 +3,7 @@ package conservancy;
 import java.util.ArrayList;
 
 /**
- * The habitats of reptile house has some characteristics like that it can only
+ * The habitats of reptile house has some characteristics like, it can only
  * have maximum of 3 natural features, Temperature Range and Size.
  */
 public final class Habitat implements IHabitat {

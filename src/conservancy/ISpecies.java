@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * ISpecies, its an species which are housed in the Reptile House.
+ * ISpecies, its an species interface which are housed in the habitat which are in Reptile House .
  *
  * <ul>
  * <li>The Temperature Range of the Species is 0-50 Celcius.
@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface ISpecies {
   /**
-   * Checks whether given species is compatile with the Habitat.
+   * Checks whether given species is compatible with the Habitat.
    *
    * @return a ISpecies object with result property as true, if its compatible
    *         otherwise false
@@ -59,10 +59,10 @@ public interface ISpecies {
 
   /**
    * It fetched species lookup details like species name and in which habitat its
-   * inhabitating.
+   * inhabiting.
    *
    * @return Hashmap object having species lookup details like species name and in
-   *         which habitat its inhabitating
+   *         which habitat its inhabiting
    */
   public Map<String, Collection<SpeciesHabitatStatus>> speciesLookUp();
 

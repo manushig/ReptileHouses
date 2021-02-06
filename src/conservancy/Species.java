@@ -31,7 +31,7 @@ public final class Species implements ISpecies {
   public Boolean isSpeciesExtinct;
 
   /**
-   * Constructs a species in terms of its species name, species type, species
+   * Constructs a species object with species name, species type, species
    * description, preferred Temperature Range, species Indicator.
    *
    * @param speciesName           It is the name of the species
@@ -39,6 +39,7 @@ public final class Species implements ISpecies {
    *                              reptile or Amphibian
    * @param size                  It is the size of the animal(small, medium,
    *                              large)
+   * @param characteristic        Characteristic/description of species                           
    * @param minTemp               It is minimum temperature required in Celsius
    * @param maxTemp               It is maximum temperature required in Celsius
    * @param speciesNaturalFeature It is a particular natural feature that species

@@ -1,12 +1,13 @@
 package conservancy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * IHabitat, it is a place where species inhabitate.
+ * IHabitat, it is a place where species inhabit.
  *
+ * Note: Habitat acquires the below characteristic from species:
  * <ul>
- * <li>The Temperature Range of the Habitat is 0-50 Celcius.
+ * <li>The Temperature Range of the Habitat is 0-50 Celsius.
  * <li>The Minimum Temperature cannot be greater than Maximum Temperature and
  * vice versa.
  * </ul>
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public interface IHabitat {
   /**
    * Checks whether given habitat is compatible with the species.
-   *
+   * @param species: Species object whose compatibility needs to be checked with current habitat
    * @return a IHabitat object with result property as true, if its compatible
    *         otherwise false
    */
@@ -22,7 +23,7 @@ public interface IHabitat {
 
   /**
    * Add species to the Habitat if they satisfy the conditions of the habitat.
-   *
+   * @param species: Species object need to be added to the habitat
    * @return a IHabitat object with result property as true, if it add the species
    *         otherwise false
    */
@@ -44,7 +45,7 @@ public interface IHabitat {
    *         details that are currently being used and how much size is available
    *         in square meters.
    */
-  public ArrayList<NaturalFeaturesReport> reportNaturalFeatures();
+  public List<NaturalFeaturesReport> reportNaturalFeatures();
 
   /**
    * It retrieves habitat name.
