@@ -142,7 +142,7 @@ Species: American Alligator
  
   New animals should be able to be brought into a Reptile House by adding them to an appropriate habitat
   
-  ![][Folder.jpg]
+  ![][C:\Manushi\NEU\Courses\Semester 1\PDP\Project 1 - repitile\Readme\Folder.jpg]
   
   Report the natural features that are currently being used in alphabetical order.
  
