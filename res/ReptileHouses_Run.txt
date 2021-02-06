@@ -1,0 +1,99 @@
+Gray TreeFrog has been added to Reptile House
+Gray TreeFrog has been added again to Reptile House to verify multile animal of same non compatible species can be added to habitat
+Green Sea Turtle has been added to Reptile House
+Rattlesnake has been added to Reptile House
+Hellbender Salamander has been added to Reptile House
+American Alligator has been added to Reptile House
+Desert Tortoise has been added to Reptile House
+Desert Tortoise has been added again to Reptile House
+Extinct species Cape Verde Giant Skink has been added to Reptile House
+
+**************Natural Features Report**************
+
+Natural Feature: FALLEN_LOGS
+Habitat Name: Habitat2, Available Size: 0 square meters
+
+Natural Feature: FLOWING_WATER
+Habitat Name: Habitat2, Available Size: 0 square meters
+
+Habitat Name: Habitat3, Available Size: 25 square meters
+
+Natural Feature: POND
+Habitat Name: Habitat4, Available Size: 20 square meters
+
+Natural Feature: SALT_WATER
+Habitat Name: Habitat2, Available Size: 0 square meters
+
+Natural Feature: TREE_BRANCHES
+Habitat Name: Habitat1, Available Size: 28 square meters
+
+
+**************Cape Verde Giant Skink Lookup**************
+Cape Verde Giant Skink species is Found: Extinct Species - Not inhabiting a Habitat
+
+
+**************Gray TreeFrog Lookup**************
+Gray TreeFrog species is Found: Habitat1
+
+
+**************Fence Lizard Lookup**************
+Fence Lizard species is not found in Reptile House
+
+
+**************T-Rex Lookup**************
+T-Rex species is unknown to Reptile House
+
+
+**************Print Habitat2 Sign**************
+
+
+1. Species Name: Green Sea Turtle
+   Total Species Housed: 1
+   Species Characteristics: Green Sea Turtle has heart-shaped shell
+   Species Size: LARGE
+   Interesting Features: Endangered     
+
+2. Species Name: Rattlesnake
+   Total Species Housed: 1
+   Species Characteristics: Rattlesnake has heavy-bodied snakes with large, broad heads with two light lines on the face
+   Species Size: LARGE
+   Interesting Features: Poisonous     
+
+3. Species Name: Desert Tortoise
+   Total Species Housed: 2
+   Species Characteristics: Desert tortoises dig underground burrows in order to hide from the sun in the deep desert.
+   Species Size: MEDIUM
+   Interesting Features: Endangered     
+
+
+
+**************Print All Habitats Details**************
+
+
+1. Habitat1
+Natural Features: TREE_BRANCHES
+Species: Gray TreeFrog
+
+2. Habitat2
+Natural Features: SALT_WATER, FALLEN_LOGS, FLOWING_WATER
+Species: Green Sea Turtle, Rattlesnake, Desert Tortoise
+
+3. Habitat3
+Natural Features: FLOWING_WATER
+Species: Hellbender Salamander
+
+4. Habitat4
+Natural Features: POND
+Species: American Alligator
+
+
+
+**************Print All Species Index**************
+1. American Alligator inhabiting in: Habitat4
+2. Cape Verde Giant Skink inhabiting in: Extinct Species - Not inhabiting a Habitat
+3. Desert Tortoise inhabiting in: Habitat2
+4. Gray TreeFrog inhabiting in: Habitat1
+5. Green Sea Turtle inhabiting in: Habitat2
+6. Hellbender Salamander inhabiting in: Habitat3
+7. Rattlesnake inhabiting in: Habitat2
+
