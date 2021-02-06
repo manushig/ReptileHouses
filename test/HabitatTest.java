@@ -307,7 +307,8 @@ public class HabitatTest {
 
     assertNotEquals(expectedResult, habitat1.getStatus());
 
-    ArrayList<NaturalFeaturesReport> habitatNaturalFtrList = (ArrayList<NaturalFeaturesReport>) habitat1.reportNaturalFeatures();
+    ArrayList<NaturalFeaturesReport> habitatNaturalFtrList = 
+        (ArrayList<NaturalFeaturesReport>) habitat1.reportNaturalFeatures();
 
     assertNotEquals(true, Objects.isNull(habitatNaturalFtrList));
 

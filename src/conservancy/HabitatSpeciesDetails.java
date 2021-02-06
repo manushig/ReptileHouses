@@ -23,7 +23,8 @@ public class HabitatSpeciesDetails {
    * @param tempRangeInCelsius    It is temperature range in Celsius
    * @param speciesNaturalFeature It is a particular natural feature that species
    *                              prefer to hang out in
-   * @param speciesCompatibality  If the species in habitat are non compatible, this variable maintains that distinction
+   * @param speciesCompatibality  If the species in habitat are non compatible,
+   *                              this variable maintains that distinction
    */
   public HabitatSpeciesDetails(int speciesSize, SpeciesType speciesType,
       TemperatureRange tempRangeInCelsius, NaturalFeature speciesNaturalFeature,
@@ -47,7 +48,7 @@ public class HabitatSpeciesDetails {
   /**
    * It sets a species available size after adding species to the habitat.
    *
-   * @param  speciesSize: Sets the particular species count, number of species count, 
+   * @param speciesSize Sets the particular species count, number of species count
    * 
    */
   public void setSpeciesSize(int speciesSize) {
@@ -56,6 +57,7 @@ public class HabitatSpeciesDetails {
 
   /**
    * It retrieves a species type.
+   * 
    * @return returns the species type, is it reptile or amphibian
    */
   public SpeciesType getSpeciesType() {
@@ -64,6 +66,7 @@ public class HabitatSpeciesDetails {
 
   /**
    * It retrieves a habitat Name in which species is there.
+   * 
    * @return returns the range of species temperature range
    */
   public TemperatureRange getTempRangeInCelsius() {
@@ -72,6 +75,7 @@ public class HabitatSpeciesDetails {
 
   /**
    * It retrieves a preferred Natural Features.
+   * 
    * @return returns the species natural feature
    */
   public NaturalFeature getSpeciesNaturalFeature() {
@@ -80,7 +84,9 @@ public class HabitatSpeciesDetails {
 
   /**
    * It retrieves a species compatible status.
-   * @return species compatibility, can this species stay with other species or not
+   * 
+   * @return species compatibility, can this species stay with other species or
+   *         not
    */
   public Boolean getSpeciesCompatibality() {
     return this.speciesCompatibality;
@@ -88,7 +94,8 @@ public class HabitatSpeciesDetails {
 
   /**
    * It sets a species compatible status.
-   * @param speciesCompatibality: sets the species compatibility 
+   * 
+   * @param speciesCompatibality sets the species compatibility
    */
   public void setSpeciesCompatibality(Boolean speciesCompatibality) {
     this.speciesCompatibality = speciesCompatibality;

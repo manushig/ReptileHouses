@@ -152,7 +152,7 @@ public class ReptileHouseDriver {
     Boolean reptileIsPoisonous = false;
     Boolean reptileIsExtinct = false;
     Boolean reptileIsCompatible = true;
-    Boolean reptileIsEndangered = false;
+    Boolean reptileIsEndangered = true;
 
     reptileHouse.createSpecies(reptileSpeciesName, reptileSpeciesType, reptileSize,
         reptileCharacteristic, reptileMinTemp, reptileMaxTemp, reptileSpeciesNaturalFeature,

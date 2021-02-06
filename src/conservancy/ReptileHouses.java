@@ -8,8 +8,9 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- * The reptile house has habitats for reptiles and amphibians and it implements the IReptileHouses interface and it is used by
- * Cold-Blooded Conservancy to track the species('s) and habitat(s).
+ * The reptile house has habitats for reptiles and amphibians and it implements
+ * the IReptileHouses interface and it is used by Cold-Blooded Conservancy to
+ * track the species('s) and habitat(s).
  */
 public final class ReptileHouses implements IReptileHouses {
   private ArrayList<IHabitat> habitatList;
@@ -47,22 +48,26 @@ public final class ReptileHouses implements IReptileHouses {
   @Override
   public IReptileHouses createSpecies(String speciesName, String speciesType, SpeciesSize size,
       String characteristic, int minTemp, int maxTemp, NaturalFeature speciesNaturalFeature,
-      Boolean isPoisonous, Boolean isExtinct, Boolean isCompatible, Boolean isEndangered) throws IllegalArgumentException{
+      Boolean isPoisonous, Boolean isExtinct, Boolean isCompatible, Boolean isEndangered)
+      throws IllegalArgumentException {
 
-	if(speciesName == null || speciesType == null || characteristic == null) {
-		throw new IllegalArgumentException("sepciesName or speciesType or charecteristic String variable might be null!");
-	}
-	
+    if (speciesName == null || speciesType == null || characteristic == null) {
+      throw new IllegalArgumentException(
+          "sepciesName or speciesType or charecteristic String variable might be null!");
+    }
+
     ISpecies speciesToAdd = new Species(speciesName, speciesType, size, characteristic, minTemp,
         maxTemp, speciesNaturalFeature, isPoisonous, isExtinct, isCompatible, isEndangered);
 
-    /* Reptile House maintains different types of species name, this check makes sure that reptile house
-     * maintains only one species in the list of species
-     * Ex: If the for the first time "snake" needs to be added to the species list, the "snake" species is added 
-     * to the list of species. If another species with same name "snake" comes in it won't added to the list of species
+    /*
+     * Reptile House maintains different types of species name, this check makes
+     * sure that reptile house maintains only one species in the list of species Ex:
+     * If the for the first time "snake" needs to be added to the species list, the
+     * "snake" species is added to the list of species. If another species with same
+     * name "snake" comes in it won't added to the list of species
      * 
      * this.speciesList list maintains all the available species.
-     * */
+     */
     Boolean addSpecies = true;
     for (ISpecies species : this.speciesList) {
       if (species.getSpeciesName().equals(speciesToAdd.getSpeciesName())) {
@@ -80,23 +85,27 @@ public final class ReptileHouses implements IReptileHouses {
   }
 
   @Override
-  public IReptileHouses addSpeciesToReptileHouse(String speciesName)  throws IllegalArgumentException{
+  public IReptileHouses addSpeciesToReptileHouse(String speciesName)
+      throws IllegalArgumentException {
     this.result = false;
 
-    if(speciesName == null ) {
-		throw new IllegalArgumentException("speciesName is null!");
-	}
-	
+    if (speciesName == null) {
+      throw new IllegalArgumentException("speciesName is null!");
+    }
+
     ISpecies speciesToAdd = null;
-    
-    /* Get the Species to be added in reptile House, which is create using createSpecies() */
+
+    /*
+     * Get the Species to be added in reptile House, which is create using
+     * createSpecies()
+     */
     for (ISpecies speciesToLookUp : this.speciesList) {
       if (speciesToLookUp.getSpeciesName().equals(speciesName)) {
         speciesToAdd = speciesToLookUp;
         break;
       }
     }
-    
+
     if (!Objects.isNull(speciesToAdd)) {
       if (speciesToAdd.getIsSpeciesExtinct()) {
         speciesToAdd.setSpeciesHabitatStatus("Extinct Species - Not inhabiting a Habitat");
@@ -111,8 +120,8 @@ public final class ReptileHouses implements IReptileHouses {
           this.result = true;
         } else {
           Boolean isSpeciesHoused = false;
- 
-          /* Get the compability of the species with the existing habitats */         
+
+          /* Get the compability of the species with the existing habitats */
           for (IHabitat habitatInReptileHouse : habitatList) {
             habitatInReptileHouse.isSpeciesCompatibleWithHabitat(speciesToAdd);
 
@@ -128,10 +137,13 @@ public final class ReptileHouses implements IReptileHouses {
               break;
             }
           }
-          
+
           if (!isSpeciesHoused) {
-        	  
-        	/* If species couldn't be housed in any of the existing Habitat, create a new one */
+
+            /*
+             * If species couldn't be housed in any of the existing Habitat, create a new
+             * one
+             */
             createNewHabitatAndSpecies(speciesToAdd);
             this.result = true;
           }
@@ -181,8 +193,8 @@ public final class ReptileHouses implements IReptileHouses {
         new HashMap<String, Collection<NaturalFeaturesDetails>>();
 
     for (IHabitat habitatInReptileHouse : this.habitatList) {
-      ArrayList<NaturalFeaturesReport> habitatNaturalFeatures = (ArrayList<NaturalFeaturesReport>) habitatInReptileHouse
-          .reportNaturalFeatures();
+      ArrayList<NaturalFeaturesReport> habitatNaturalFeatures = 
+          (ArrayList<NaturalFeaturesReport>) habitatInReptileHouse.reportNaturalFeatures();
 
       for (NaturalFeaturesReport naturalFeaturesReport : habitatNaturalFeatures) {
         Collection<NaturalFeaturesDetails> naturalFeaturesDetails = 
@@ -250,24 +262,23 @@ public final class ReptileHouses implements IReptileHouses {
   }
 
   @Override
-  public String speciesLookUp(String speciesName)  throws IllegalArgumentException{
-	  
-	if(speciesName == null ) {
-		throw new IllegalArgumentException("speciesName is null!");
+  public String speciesLookUp(String speciesName) throws IllegalArgumentException {
+
+    if (speciesName == null) {
+      throw new IllegalArgumentException("speciesName is null!");
     }
 
-	  
-	ArrayList<String> lookUpResult = new ArrayList<String>();
-	StringBuilder stringBuilder = new StringBuilder();
-	
-	stringBuilder.append("\n**************" + speciesName + " Lookup**************\n");
-	ISpecies speciesToLookUp = null;
-	for (ISpecies speciesInList : this.speciesList) {
-	  if (speciesInList.getSpeciesName().equals(speciesName)) {
-	    speciesToLookUp = speciesInList;
-	    break;
-	  }
-	}
+    ArrayList<String> lookUpResult = new ArrayList<String>();
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append("\n**************" + speciesName + " Lookup**************\n");
+    ISpecies speciesToLookUp = null;
+    for (ISpecies speciesInList : this.speciesList) {
+      if (speciesInList.getSpeciesName().equals(speciesName)) {
+        speciesToLookUp = speciesInList;
+        break;
+      }
+    }
 
     if (!Objects.isNull(speciesToLookUp)) {
 
@@ -362,12 +373,12 @@ public final class ReptileHouses implements IReptileHouses {
   }
 
   @Override
-  public String printHabitatIndex(String habitatName)  throws IllegalArgumentException{
-	  
-    if(habitatName == null ) {
-	    throw new IllegalArgumentException("habitatName is null!");
-	}
-		
+  public String printHabitatIndex(String habitatName) throws IllegalArgumentException {
+
+    if (habitatName == null) {
+      throw new IllegalArgumentException("habitatName is null!");
+    }
+
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n**************Print " + habitatName + " Sign**************\n");
     IHabitat habitatToLookUp = null;
