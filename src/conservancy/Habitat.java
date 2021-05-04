@@ -1,6 +1,8 @@
 package conservancy;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The habitats of reptile house has some characteristics like, it can only have
@@ -12,10 +14,10 @@ public final class Habitat implements IHabitat {
   private int habitatAvailableSize;
   private SpeciesType habitatSpeciesType;
   private TemperatureRange habitatTempRangeInCelsius;
-  private ArrayList<NaturalFeature> habitatNaturalFeatureList;
-  private ArrayList<ISpecies> speciesList;
-  public Boolean result;
-  public Boolean speciesCompatibality;
+  private List<NaturalFeature> habitatNaturalFeatureList;
+  private List<ISpecies> speciesList;
+  public boolean result;
+  public boolean speciesCompatibality;
 
   /**
    * Constructs a habitat in terms of its name and size.
@@ -63,7 +65,7 @@ public final class Habitat implements IHabitat {
    *
    * @return the Boolean object which indicate the compatibility status
    */
-  private Boolean checkSpeciesCompatibilty(ISpecies species, Boolean doCompatibilityCheck) {
+  private boolean checkSpeciesCompatibilty(ISpecies species, Boolean doCompatibilityCheck) {
     Boolean isSpeciesCompatible = false;
     species.isSpeciesCompatibleWithHabitat(this.habitatSpeciesType, this.habitatTempRangeInCelsius,
         this.habitatNaturalFeatureList, this.habitatAvailableSize, doCompatibilityCheck);
@@ -74,7 +76,7 @@ public final class Habitat implements IHabitat {
   @Override
   public IHabitat addSpeciesToHabitat(ISpecies species) {
     HabitatSpeciesDetails habtatSpeciesDetails = species.retrieveSpeciesDetails();
-
+    Objects.requireNonNull(habtatSpeciesDetails);
     this.habitatAvailableSize = this.habitatAvailableSize - habtatSpeciesDetails.getSpeciesSize();
 
     if (!this.habitatNaturalFeatureList.contains(habtatSpeciesDetails.getSpeciesNaturalFeature())) {

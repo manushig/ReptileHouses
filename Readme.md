@@ -253,6 +253,7 @@ There are another supporting classes which are used by other reptile, habitat an
 2) Habitat name is in this format - "Habitat1", "Habitat2"
 3) Habitat Temperature Range will be of the first species' Habitat Temperature Range(e.g 8 - 20 C) and if another species of Temperature Range (2 - 14C) or (10 - 22C) will not be added in the habitat since there Temperature Range is not within the habitat's temperature range (i.e 8 - 20C) 
 4) Only Temperature Range between (0 - 50) are allowed.
+5) Habitat Location in Reptile House is fixed(i.e North Zone - Assuming all habitats are located in "North Zone" of the reptile house and Food courts are located in "South Zone" and Visitor center located in "East Zone" etc)
   
 # Limitations
  None

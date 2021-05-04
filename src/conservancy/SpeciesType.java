@@ -1,5 +1,7 @@
 package conservancy;
 
+import java.util.Objects;
+
 /**
  * Species Type, whether its a reptile or amphibian.
  */
@@ -13,12 +15,14 @@ public final class SpeciesType {
    *
    */
   public SpeciesType(String speciesType) {
+    Objects.requireNonNull(speciesType);
     this.speciesType = speciesType;
   }
 
   /**
    * It retrieves Species type.
-   *
+   * 
+   * @return Species type.
    */
   public String getSpeciesType() {
     return this.speciesType;

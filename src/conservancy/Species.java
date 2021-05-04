@@ -3,6 +3,7 @@ package conservancy;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -24,11 +25,11 @@ public final class Species implements ISpecies {
 
   private final SpeciesIndicators speciesIndicator;
 
-  private ArrayList<SpeciesHabitatStatus> speciesHabitatStatusList;
+  private List<SpeciesHabitatStatus> speciesHabitatStatusList;
 
-  public Boolean result;
+  public boolean result;
 
-  public Boolean isSpeciesExtinct;
+  public boolean isSpeciesExtinct;
 
   /**
    * Constructs a species object with species name, species type, species
@@ -39,7 +40,7 @@ public final class Species implements ISpecies {
    *                              reptile or Amphibian
    * @param size                  It is the size of the animal(small, medium,
    *                              large)
-   * @param characteristic        Characteristic/description of species                           
+   * @param characteristic        Characteristic/description of species
    * @param minTemp               It is minimum temperature required in Celsius
    * @param maxTemp               It is maximum temperature required in Celsius
    * @param speciesNaturalFeature It is a particular natural feature that species
@@ -83,18 +84,19 @@ public final class Species implements ISpecies {
 
   @Override
   public ISpecies isSpeciesCompatibleWithHabitat(SpeciesType speciesType,
-      TemperatureRange habitatTempRange, ArrayList<NaturalFeature> habitatNaturalFeatureList,
-      int habitatAvailableSize, Boolean doCompatibilityCheck) {
+      TemperatureRange habitatTempRange, List<NaturalFeature> habitatNaturalFeatureList,
+      int habitatAvailableSize, boolean doCompatibilityCheck) {
     this.result = false;
-    Boolean isTypesCompatible = preferredSpeciesType(speciesType);
-    Boolean isSpeciesCanFit = (this.speciesDescription.getSize()
+
+    boolean isTypesCompatible = preferredSpeciesType(speciesType);
+    boolean isSpeciesCanFit = (this.speciesDescription.getSize()
         .getSizeRequiredInHabitat() <= habitatAvailableSize);
-    Boolean isSpeciesWithinHabitatTemperatureRange = withinHabitatTemperatureRange(
+    boolean isSpeciesWithinHabitatTemperatureRange = withinHabitatTemperatureRange(
         habitatTempRange);
-    Boolean isPreferredNaturalFeaturesAvailable = preferredNaturalFeature(
+    boolean isPreferredNaturalFeaturesAvailable = preferredNaturalFeature(
         habitatNaturalFeatureList);
 
-    Boolean isSpeciesCompatible = isSpeciesCompatiblewithOtherSpiciesInHabitat(habitatTempRange,
+    boolean isSpeciesCompatible = isSpeciesCompatiblewithOtherSpiciesInHabitat(habitatTempRange,
         doCompatibilityCheck);
 
     if (isTypesCompatible && isSpeciesCanFit && isSpeciesWithinHabitatTemperatureRange
@@ -113,8 +115,8 @@ public final class Species implements ISpecies {
    *
    * @return the Boolean object which indicate the compatibility status
    */
-  private Boolean isSpeciesCompatiblewithOtherSpiciesInHabitat(TemperatureRange habitatTempRange,
-      Boolean doCompatibilityCheck) {
+  private boolean isSpeciesCompatiblewithOtherSpiciesInHabitat(TemperatureRange habitatTempRange,
+      boolean doCompatibilityCheck) {
     if (Objects.isNull(habitatTempRange)) {
       // Empty Habitat
       return true;
@@ -133,7 +135,7 @@ public final class Species implements ISpecies {
    *
    * @return the Boolean object which indicate the compatibility status
    */
-  private Boolean withinHabitatTemperatureRange(TemperatureRange habitatTempRange) {
+  private boolean withinHabitatTemperatureRange(TemperatureRange habitatTempRange) {
     if (Objects.isNull(habitatTempRange)) {
       return true;
     } else {
@@ -155,7 +157,7 @@ public final class Species implements ISpecies {
    *
    * @return the Boolean object which indicate the compatibility status
    */
-  private Boolean preferredSpeciesType(SpeciesType speciesType) {
+  private boolean preferredSpeciesType(SpeciesType speciesType) {
     if (speciesType.getSpeciesType().isEmpty() || (this.speciesType.equals(speciesType))) {
       return true;
     } else {
@@ -169,7 +171,7 @@ public final class Species implements ISpecies {
    *
    * @return the Boolean object which indicate the compatibility status
    */
-  private Boolean preferredNaturalFeature(ArrayList<NaturalFeature> habitatNaturalFeatureList) {
+  private boolean preferredNaturalFeature(List<NaturalFeature> habitatNaturalFeatureList) {
     if (habitatNaturalFeatureList.size() > 3) {
       return false;
     } else if (habitatNaturalFeatureList.size() == 0) {
@@ -204,12 +206,12 @@ public final class Species implements ISpecies {
   }
 
   @Override
-  public Boolean getStatus() {
+  public boolean getStatus() {
     return this.result;
   }
 
   @Override
-  public Boolean getIsSpeciesExtinct() {
+  public boolean getIsSpeciesExtinct() {
     return this.isSpeciesExtinct;
   }
 
@@ -229,8 +231,7 @@ public final class Species implements ISpecies {
   @Override
   public Map<String, Collection<SpeciesHabitatStatus>> speciesLookUp() {
 
-    Map<String, Collection<SpeciesHabitatStatus>> speciesHabitatList = 
-        new HashMap<String, Collection<SpeciesHabitatStatus>>();
+    Map<String, Collection<SpeciesHabitatStatus>> speciesHabitatList = new HashMap<String, Collection<SpeciesHabitatStatus>>();
     if (!this.speciesHabitatStatusList.isEmpty()) {
       speciesHabitatList.put(this.speciesName, this.speciesHabitatStatusList);
     }
@@ -244,6 +245,7 @@ public final class Species implements ISpecies {
 
   @Override
   public String retriveDetailsToPrintHabitatSign(String habitatName) {
+    Objects.requireNonNull(habitatName);
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("Species Name: " + this.speciesName);
 

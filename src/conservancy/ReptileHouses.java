@@ -3,6 +3,7 @@ package conservancy;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -13,10 +14,10 @@ import java.util.TreeMap;
  * track the species('s) and habitat(s).
  */
 public final class ReptileHouses implements IReptileHouses {
-  private ArrayList<IHabitat> habitatList;
-  private ArrayList<ISpecies> speciesList;
+  private List<IHabitat> habitatList;
+  private List<ISpecies> speciesList;
   private Boolean result;
-  private static IReptileHouses instance = null;
+  private static IReptileHouses instance;
 
   /**
    * Constructs a reptile house in terms of its name and size.
@@ -27,6 +28,7 @@ public final class ReptileHouses implements IReptileHouses {
     this.habitatList = new ArrayList<IHabitat>();
     this.speciesList = new ArrayList<ISpecies>();
     this.result = true;
+    ReptileHouses.instance = null;
   }
 
   /**
@@ -319,7 +321,7 @@ public final class ReptileHouses implements IReptileHouses {
   @Override
   public String printSpeciesIndex() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("\n**************Print All Species Index**************\n");
+    stringBuilder.append("\n**************Print All Species Index**************\n\n");
     Map<String, Collection<SpeciesHabitatStatus>> speciesDetailsCollection = 
         new HashMap<String, Collection<SpeciesHabitatStatus>>();
 
@@ -401,7 +403,8 @@ public final class ReptileHouses implements IReptileHouses {
   @Override
   public String allHabitatsMap() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("\n**************Print All Habitats Details**************\n");
+    stringBuilder.append("\n**************Print All Habitats Details**************\n");    
+    stringBuilder.append("\nHabitat Location: " + habitLocation);
     int habitatCtr = 1;
     for (IHabitat habitat : habitatList) {
       stringBuilder.append("\n\n" + habitatCtr + ". ");

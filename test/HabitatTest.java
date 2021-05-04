@@ -31,9 +31,9 @@ public class HabitatTest {
   @Before
   public void setUp() {
     String habitatName = "Habitat1";
-    // String habitatLocation = "North-Zone";
+    String habitatLocation = "North-Zone";
     int habitatSize = 30;
-    habitat1 = createHabitat(habitatSize, habitatName);
+    habitat1 = createHabitat(habitatSize, habitatName, habitatLocation);
 
     String amphibianSpeciesName = "Gray TreeFrog";
     String amphibianSpeciesType = "AMPHIBIAN";
@@ -402,7 +402,7 @@ public class HabitatTest {
 
   }
 
-  protected IHabitat createHabitat(int habitatSize, String habitatName) {
+  protected IHabitat createHabitat(int habitatSize, String habitatName, String habitatLocation) {
     return new Habitat(habitatSize, habitatName);
   }
 

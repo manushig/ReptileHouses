@@ -26,6 +26,11 @@ public interface IReptileHouses {
    *
    */
   public final int habitatSize = 30;
+  /**
+   * Habitat Location as North-Zone.
+   *
+   */
+  public final String habitLocation = "North-Zone";
 
   /**
    * It creates the species data in the Reptile House to track the different

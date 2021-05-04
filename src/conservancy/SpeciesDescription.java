@@ -1,5 +1,7 @@
 package conservancy;
 
+import java.util.Objects;
+
 /**
  * Species Description, A description of the species' defining characteristic
  * and size (small, medium, large).
@@ -19,6 +21,8 @@ public final class SpeciesDescription {
    * 
    */
   public SpeciesDescription(SpeciesSize size, String characteristic) {
+    Objects.requireNonNull(size);
+    Objects.requireNonNull(characteristic);
     this.size = size;
     this.characteristic = characteristic;
   }

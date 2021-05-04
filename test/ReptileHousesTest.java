@@ -1,5 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.lang.reflect.Field;
 
@@ -318,7 +317,33 @@ public class ReptileHousesTest {
 
     String naturalFeatureCollection = reptileHouse1.reportNaturalFeatures();
 
-    assertNotEquals(true, naturalFeatureCollection.isEmpty());
+    String expected = "\n"
+        + "**************Natural Features Report**************\n"
+        + "\n"
+        + "Natural Feature: FALLEN_LOGS\n"
+        + "Habitat Name: Habitat2, Available Size: 0 square meters\n"
+        + "\n"
+        + "Natural Feature: FLOWING_WATER\n"
+        + "Habitat Name: Habitat2, Available Size: 0 square meters\n"
+        + "\n"
+        + "Habitat Name: Habitat3, Available Size: 25 square meters\n"
+        + "\n"
+        + "Habitat Name: Habitat6, Available Size: 25 square meters\n"
+        + "\n"
+        + "Natural Feature: POND\n"
+        + "Habitat Name: Habitat4, Available Size: 20 square meters\n"
+        + "\n"
+        + "Natural Feature: ROCKS\n"
+        + "Habitat Name: Habitat5, Available Size: 25 square meters\n"
+        + "\n"
+        + "Natural Feature: SALT_WATER\n"
+        + "Habitat Name: Habitat2, Available Size: 0 square meters\n"
+        + "\n"
+        + "Natural Feature: TREE_BRANCHES\n"
+        + "Habitat Name: Habitat1, Available Size: 29 square meters\n"
+        + "";
+    
+    assertEquals(expected, naturalFeatureCollection);
   }
 
   @Test
@@ -452,7 +477,7 @@ public class ReptileHousesTest {
 
     assertEquals(expectedResult, reptileHouse1.getStatus());
 
-    String expected = "\n" + "**************Print All Species Index**************\n"
+    String expected = "\n" + "**************Print All Species Index**************\n\n"
         + "1. American Alligator inhabiting in: Habitat4\n"
         + "2. Cape Verde Giant Skink inhabiting in: Extinct Species - Not inhabiting a Habitat\n"
         + "3. Desert Tortoise inhabiting in: Habitat2, Habitat6\n"
@@ -584,9 +609,10 @@ public class ReptileHousesTest {
 
     String expected;
 
-    expected = "\n" + "**************Print All Habitats Details**************\n" + "\n" + "\n"
-        + "1. Habitat1\n" + "Natural Features: TREE_BRANCHES\n" + "Species: Gray TreeFrog\n" + "\n"
-        + "2. Habitat2\n" + "Natural Features: SALT_WATER, FALLEN_LOGS, FLOWING_WATER\n"
+    expected = "\n" + "**************Print All Habitats Details**************\n" + "\n"
+        + "Habitat Location: North-Zone\n" + "\n" + "1. Habitat1\n"
+        + "Natural Features: TREE_BRANCHES\n" + "Species: Gray TreeFrog\n" + "\n" + "2. Habitat2\n"
+        + "Natural Features: SALT_WATER, FALLEN_LOGS, FLOWING_WATER\n"
         + "Species: Green Sea Turtle, Rattlesnake, Desert Tortoise\n" + "\n" + "3. Habitat3\n"
         + "Natural Features: FLOWING_WATER\n" + "Species: Hellbender Salamander\n" + "\n"
         + "4. Habitat4\n" + "Natural Features: POND\n" + "Species: American Alligator\n" + "\n"
@@ -599,7 +625,7 @@ public class ReptileHousesTest {
   @Test
   public void testPrintSpeciesIndexWhenNoSpeciesInReptileHouse() {
 
-    String expected = "\n" + "**************Print All Species Index**************\n"
+    String expected = "\n" + "**************Print All Species Index**************\n\n"
         + "No species in the Reptile House";
 
     assertEquals(expected, reptileHouse1.printSpeciesIndex());

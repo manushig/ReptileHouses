@@ -1,7 +1,7 @@
 package conservancy;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,8 +21,8 @@ public interface ISpecies {
    *         otherwise false
    */
   public ISpecies isSpeciesCompatibleWithHabitat(SpeciesType speciesType,
-      TemperatureRange habitatTempRange, ArrayList<NaturalFeature> habitatNaturalFeatureList,
-      int habitatAvailableSize, Boolean doCompatibilityCheck);
+      TemperatureRange habitatTempRange, List<NaturalFeature> habitatNaturalFeatureList,
+      int habitatAvailableSize, boolean doCompatibilityCheck);
 
   /**
    * Species sets its habitat location where it is residing and its counts in that
@@ -39,7 +39,7 @@ public interface ISpecies {
    *
    * @return a result field.
    */
-  public Boolean getStatus();
+  public boolean getStatus();
 
   /**
    * It retrieves the details like Temperature Range, Species Size, Species Type
@@ -55,7 +55,7 @@ public interface ISpecies {
    *
    * @return Boolean object having species extinct Indicator detail
    */
-  public Boolean getIsSpeciesExtinct();
+  public boolean getIsSpeciesExtinct();
 
   /**
    * It fetched species lookup details like species name and in which habitat its
